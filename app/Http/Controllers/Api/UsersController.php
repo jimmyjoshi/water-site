@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Access\User\User;
 use Response;
 use Carbon;
+use App\Repositories\Backend\Access\User\UserRepository;
 use App\Repositories\Backend\User\UserContract;
 use App\Repositories\Backend\UserNotification\UserNotificationRepositoryContract;
 use App\Http\Transformers\UserTransformer;
@@ -26,7 +27,8 @@ class UsersController extends Controller
      */
     public function __construct(UserTransformer $userTransformer)
     {
-        $this->userTransformer = $userTransformer;
+        $this->userTransformer  = $userTransformer;
+        $this->users            = new UserRepository();
     }
 
     /**
@@ -59,6 +61,55 @@ class UsersController extends Controller
         return response()->json($responseData);
     }
 
+    public function register(Request $request) 
+    {
+        $postData = $request->all();
+
+       if (isset($postData['username']) && $postData['username'] &&
+                isset($postData['password']) && $postData['password'] &&
+                isset($postData['name']) && $postData['name']
+        ) {
+            if (isset($postData['email']) && !$this->users->checkEmailAlreadyExist($postData['email'])) {
+                return $this->respondInternalError('User\'s Email Already Exist');
+            }
+            
+            if (!$this->users->checkUserNameAlreadyExist($postData['username'])) {
+                return $this->respondInternalError('Username Already Exist');
+            }
+
+            $user = $this->users->createAppUser($postData);
+            //check user is created 
+            if ($user) {
+                $this->setStatusCode(200);
+                
+                $credentials = $request->only('username', 'password');
+                try {
+                    // verify the credentials and create a token for the user
+                    if (! $token = JWTAuth::attempt($credentials)) 
+                    {
+                        return response()->json(['error' => 'invalid_credentials'], 401);
+                    }
+                } catch (JWTException $e) 
+                {
+                    // something went wrong
+                    return response()->json(['error' => 'could_not_create_token'], 500);
+                }
+                
+                $user = Auth::user()->toArray();
+
+                $userData = array_merge($user, ['token' => $token]);
+
+                $responseData = $this->userTransformer->getUserInfo($userData);
+                
+
+                return $this->ApiSuccessResponse($responseData);
+            } else {
+                return $this->respondInternalError('Invalid Arguments');
+            }
+        } else {
+            return $this->respondInternalError('Invalid Arguments');
+        }
+    }
     /**
      * Logout request
      * @param  Request $request

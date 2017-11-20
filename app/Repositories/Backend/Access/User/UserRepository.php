@@ -36,9 +36,10 @@ class UserRepository extends BaseRepository
     /**
      * @param RoleRepository $role
      */
-    public function __construct(RoleRepository $role)
+    public function __construct()
     {
-        $this->role = $role;
+        $this->role     = new RoleRepository();
+        $this->model    = new User;
     }
 
     /**
@@ -355,5 +356,61 @@ class UserRepository extends BaseRepository
         $user->confirmed = isset($input['confirmed']) ? 1 : 0;
 
         return $user;
+    }
+
+     public function checkEmailAlreadyExist($email) {
+        $result = $this->query()
+                ->where('email', '=', $email)
+                ->count();
+        if ($result > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * 
+     * @param type $postData
+     * @return User|boolean
+     */
+    public function createAppUser($postData) 
+    {
+        $user = self::MODEL;
+        $user = new $user();   
+        $user->username     = $postData['username'];
+        $user->name         = $postData['name'];
+        $user->email        = isset($postData['email']) ? $postData['email'] : '';
+        $user->password     = bcrypt($postData['password']);
+        $user->status       = 1;
+        $user->confirmed    = 1;  
+        
+        // Get Default Role
+        $roleDetails = $this->role->getDefaultUserRole();
+
+        if ($user->save()) 
+        {
+            $user->attachRole($roleDetails);
+            return $user;
+        } 
+        else 
+        {
+            return false;
+        }
+    }
+
+     public function checkUserNameAlreadyExist($username) 
+     {
+        $result = $this->query()
+                ->where('username', '=', $username)
+                ->count();
+        if ($result > 0) 
+        {
+            return false;
+        } 
+        else 
+        {
+            return true;
+        }
     }
 }
