@@ -1,0 +1,153 @@
+<?php
+
+namespace App\Http\Transformers;
+
+use App\Http\Transformers;
+use URL;
+
+class CategoryTransformer extends Transformer 
+{
+    /** Transform
+     * 
+     * @param array $data
+     * @return array
+     */
+    public function transform($data) 
+    {
+        if(is_array($data))
+        {
+            $data = (object)$data;
+        }
+        
+        return [
+            'eventId'           => (int) $data->id,
+            'eventName'         => $data->name,
+            'eventTitle'        => $data->title,
+            'eventStartDate'    => date('d-m-Y', strtotime($data->start_date)),
+            'eventEndDate'      => date('d-m-Y', strtotime($data->end_date))
+        ];
+    }
+
+    public function categoryData($categories)
+    {
+        $response = [];
+
+        $i = 0;
+        foreach($categories as $category)
+        {
+            $response[$i] = [
+                'categoryId'    => (int) $category->id,
+                'categoryTitle' => $category->title ? $category->title : '',
+                'description'   => $category->description ? $category->description : '',
+                'categoryImage' => URL::to('/').'/uploads/category/'.$category->image,
+                'productsCount' => count($category->products),
+                'products'      => []
+            ];
+
+            if(count($category->products))
+            {
+                foreach($category->products as $product)
+                {
+                    $response[$i]['products'][] = [
+                        'productId'     => (int) $product->id,
+                        'productTitle'  => $product->title,
+                        'productPrice'  => (float) $product->price,
+                        'productQty'    => (int) $product->qty,
+                        'productImage'  => $product->image ? URL::to('/').'/uploads/product/'.$product->image : '',
+                        'productImage1' => $product->image1 ? URL::to('/').'/uploads/product/'.$product->image1 : '',
+                        'productImage2' => $product->image2 ? URL::to('/').'/uploads/product/'.$product->image2 : '',
+                        'productImage3' => $product->image3 ? URL::to('/').'/uploads/product/'.$product->image3 : '',
+                        'productDescription'  => $product->description ? $product->description : ''
+                    ];
+                }
+            }
+
+            $i++;
+        }
+
+        return $response;
+    }
+
+    public function productData($products)
+    {
+        $response = [] ;
+
+        foreach($products as $product)
+        {
+            $response[] = [
+                'productId'     => (int) $product->id,
+                'productTitle'  => $product->title,
+                'productPrice'  => (float) $product->price,
+                'productQty'    => (int) $product->qty,
+                'productImage'  => $product->image ? URL::to('/').'/uploads/product/'.$product->image : '',
+                'productImage1' => $product->image1 ? URL::to('/').'/uploads/product/'.$product->image1 : '',
+                'productImage2' => $product->image2 ? URL::to('/').'/uploads/product/'.$product->image2 : '',
+                'productImage3' => $product->image3 ? URL::to('/').'/uploads/product/'.$product->image3 : '',
+                'productDescription'  => $product->description ? $product->description : '',
+                'categoryId'    => isset($product->category->id) ? (int) $product->category->id : 0,
+                'categoryTitle' => isset($product->category->title) ? $product->category->title : '',
+                'description'   => isset($product->category->description) ? $product->category->description : '',
+                'categoryImage' => isset($product->category->image) ? URL::to('/').'/uploads/category/'.$product->category->image : ''
+            ];
+        }
+
+        return $response;
+    }
+
+    public function singleCategoryData($category)
+    {
+        $response = [];
+
+        $response = [
+                'categoryId'    => (int) $category->id,
+                'categoryTitle' => $category->title ? $category->title : '',
+                'description'   => $category->description ? $category->description : '',
+                'categoryImage' => URL::to('/').'/uploads/category/'.$category->image,
+                'productsCount' => count($category->products),
+                'products'      => []
+            ];
+
+            if(count($category->products))
+            {
+                foreach($category->products as $product)
+                {
+                    $response['products'][] = [
+                        'productId'     => (int) $product->id,
+                        'productTitle'  => $product->title,
+                        'productPrice'  => (float) $product->price,
+                        'productQty'    => (int) $product->qty,
+                        'productImage'  => $product->image ? URL::to('/').'/uploads/product/'.$product->image : '',
+                        'productImage1' => $product->image1 ? URL::to('/').'/uploads/product/'.$product->image1 : '',
+                        'productImage2' => $product->image2 ? URL::to('/').'/uploads/product/'.$product->image2 : '',
+                        'productImage3' => $product->image3 ? URL::to('/').'/uploads/product/'.$product->image3 : '',
+                        'productDescription'  => $product->description ? $product->description : ''
+                    ];
+                }
+            }
+
+        return $response;
+    }
+
+    public function cartData($cartData)
+    {
+        $response = [];
+
+        foreach($cartData as $cart)
+        {
+            $response[] = [
+                'cartQty'       => $cart->qty,
+                'productId'     => (int) $cart->product->id,
+                'productTitle'  => $cart->product->title,
+                'productPrice'  => (float) $cart->product->price,
+                'productQty'    => (int) $cart->product->qty,
+                'productImage'  => $cart->product->image ? URL::to('/').'/uploads/product/'.$cart->product->image : '',
+                'productImage1' => $cart->product->image1 ? URL::to('/').'/uploads/product/'.$cart->product->image1 : '',
+                'productImage2' => $cart->product->image2 ? URL::to('/').'/uploads/product/'.$cart->product->image2 : '',
+                'productImage3' => $cart->product->image3 ? URL::to('/').'/uploads/product/'.$cart->product->image3 : '',
+                'productDescription'  => $cart->product->description ? $cart->product->description : ''
+            ];
+        }
+
+        return $response;
+    }
+}

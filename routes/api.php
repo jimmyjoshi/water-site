@@ -36,4 +36,13 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt.customauth'], function 
     Route::post('events/create', 'APIEventsController@create')->name('events.create');
     Route::post('events/edit', 'APIEventsController@edit')->name('events.edit');
     Route::post('events/delete', 'APIEventsController@delete')->name('events.delete');
+
+    Route::get('categories', 'APICategoryController@index')->name('api-category.index');
+    Route::any('products-by-category', 'APICategoryController@productsByCategory')->name('api-category.products-by-category');
+    Route::get('products', 'APIProductController@index')->name('api-product.index');
+
+    Route::get('products/get-cart', 'APIProductController@getCart')->name('api-product.get-cart');    
+    Route::post('products/add-to-cart', 'APIProductController@addToCart')->name('api-product.add-to-cart');    
+    Route::post('products/remove-product-from-cart', 'APIProductController@removeProductFromCart')->name('api-product.remove-product-from-cart');    
+
 });

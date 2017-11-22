@@ -11,7 +11,6 @@ use Response;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     /**
      * default status code
      *
@@ -33,7 +32,7 @@ class Controller extends BaseController
      */
     public function getStatusCode()
     {
-    	return $this->statusCode;
+        return $this->statusCode;
     }
 
     /**
@@ -66,8 +65,8 @@ class Controller extends BaseController
      */
     public function setStatusCode($statusCode)
     {
-    	$this->statusCode = $statusCode;
-    	return $this;
+        $this->statusCode = $statusCode;
+        return $this;
     }
     /**
      * responsd not found
@@ -77,7 +76,7 @@ class Controller extends BaseController
      */
     public function respondNotFound($message = "Not Found")
     {
-    	return $this->setStatusCode(IlluminateResponse::HTTP_NOT_FOUND)->respondWithError($message);
+        return $this->setStatusCode(IlluminateResponse::HTTP_NOT_FOUND)->respondWithError($message);
     }
     /**
      * Respond with error
@@ -87,7 +86,7 @@ class Controller extends BaseController
      */
     public function respondInternalError($message = "Internal Error")
     {
-    	return $this->setStatusCode('500')->respondWithError($message);
+        return $this->setStatusCode('500')->respondWithError($message);
     }
     /**
      * Respond
@@ -98,7 +97,7 @@ class Controller extends BaseController
      */
     public function respond($data, $headers = [])
     {        
-    	//return Response::json($data, $this->getStatusCode(), $headers);
+        //return Response::json($data, $this->getStatusCode(), $headers);
         return Response::json($data);
     }
     
@@ -114,7 +113,7 @@ class Controller extends BaseController
         $response['data'] = $data;
         $response['message'] = $this->getSuccessMessage();
         $response['code'] = $this->getStatusCode();
-    	//return Response::json($response, $this->getStatusCode(), $headers);
+        //return Response::json($response, $this->getStatusCode(), $headers);
         return Response::json($response);
     }
     /**
@@ -144,10 +143,10 @@ class Controller extends BaseController
      */
     public function respondWithError($message)
     {
-    	return $this->respond([
-    			'message' => $message,
+        return $this->respond([
+                'message' => $message,
                         'code' => $this->getStatusCode()
-    		]);
+            ]);
     }
     /**
      * Respond Created
