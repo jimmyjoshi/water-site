@@ -39,6 +39,19 @@
 
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
+                <a href="{{ route('admin.category.index') }}">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span>Manage Category</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/product')) }}">
+                <a href="{{ route('admin.product.index') }}">
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    <span>Manage Products</span>
+                </a>
+            </li>
             @role(1)
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
