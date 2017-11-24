@@ -157,4 +157,11 @@ class APICategoryController extends BaseApiController
 
         return $this->respondInternalError('Invalid Category Id');
     }
+
+    public function featured(Request $request)
+    {
+        $featureData = $this->categoryTransformer->featuredCategoryData();
+
+        return $this->ApiSuccessResponse($featureData);
+    }
 }

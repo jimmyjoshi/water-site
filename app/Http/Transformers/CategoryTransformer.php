@@ -150,4 +150,16 @@ class CategoryTransformer extends Transformer
 
         return $response;
     }
+
+    public function featuredCategoryData()
+    {
+        return  [
+            'featured'  => [
+                'title'     => 'New Arrival',
+                'subtitle'  => 'Fall Winter 2017-18 Fashion Show',
+                'image'     =>  URL::to('/').'/uploads/category/featured.png'
+            ]
+        ];
+
+    }
 }
