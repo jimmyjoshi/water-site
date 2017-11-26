@@ -55,6 +55,11 @@ class UsersController extends Controller
 
         $userData = array_merge($user, ['token' => $token]);
 
+        if($request->get('token'))
+        {
+            $this->users->setToken((object)$user, $request->get('token'));
+        }
+
         $responseData = $this->userTransformer->transform((object)$userData);
 
         // if no errors are encountered we can return a JWT
@@ -64,20 +69,71 @@ class UsersController extends Controller
     public function register(Request $request) 
     {
         $postData = $request->all();
-
+        
        if (isset($postData['username']) && $postData['username'] &&
                 isset($postData['password']) && $postData['password'] &&
                 isset($postData['name']) && $postData['name']
         ) {
-            if (isset($postData['email']) && !$this->users->checkEmailAlreadyExist($postData['email'])) {
+            if (isset($postData['email']) && !$this->users->checkEmailAlreadyExist($postData['email'])) 
+            {
                 return $this->respondInternalError('User\'s Email Already Exist');
             }
             
-            if (!$this->users->checkUserNameAlreadyExist($postData['username'])) {
+            if (!$this->users->checkUserNameAlreadyExist($postData['username'])) 
+            {
                 return $this->respondInternalError('Username Already Exist');
             }
 
-            $user = $this->users->createAppUser($postData);
+            if($request->get('token'))
+            {
+                $userInfoByToken = $this->users->getUserByDeviceToken($request->get('token'));
+
+                if(isset($userInfoByToken))
+                {
+                    $userInfoByToken->user->username = $postData['username'];
+                    $userInfoByToken->user->password = bcrypt($postData['password']);
+                    $userInfoByToken->user->name = $postData['name'];
+                    $userInfoByToken->user->email = $postData['email'];
+                    $userInfoByToken->user->save();
+                    
+
+
+                    $credentials = [
+                        'email'     => $postData['email'],
+                        'password'  => $postData['password']
+                    ];
+
+                    try {
+                        // verify the credentials and create a token for the user
+                        if (! $token = JWTAuth::attempt($credentials)) 
+                        {
+                            return response()->json(['error' => 'invalid_credentials'], 401);
+                        }
+                    } catch (JWTException $e) 
+                    {
+                        // something went wrong
+                        return response()->json(['error' => 'could_not_create_token'], 500);
+                    }
+                        
+                    $user = Auth::user()->toArray();
+
+                    $userData = array_merge($user, ['token' => $token]);
+
+                    if($request->get('token'))
+                    {
+                        $this->users->setToken((object)$user, $request->get('token'));
+                    }
+
+                    $responseData = $this->userTransformer->getUserInfo($userData);
+                    
+
+                    return $this->ApiSuccessResponse($responseData);
+                }
+            }
+            else
+            {
+                $user = $this->users->createAppUser($postData);
+            }
             //check user is created 
             if ($user) {
                 $this->setStatusCode(200);
@@ -98,6 +154,11 @@ class UsersController extends Controller
                 $user = Auth::user()->toArray();
 
                 $userData = array_merge($user, ['token' => $token]);
+
+                if($request->get('token'))
+                {
+                    $this->users->setToken((object)$user, $request->get('token'));
+                }
 
                 $responseData = $this->userTransformer->getUserInfo($userData);
                 
@@ -127,4 +188,65 @@ class UsersController extends Controller
         }*/
     }
 
+    public function registerAsGuest(Request $request)
+    {
+        $postData = $request->all();
+
+        $randomName             = 'Guest-'.rand(1111, 9999).'-'.rand(1111, 9999);
+        $postData['username']   = $randomName;
+        $postData['name']       = $randomName;        
+        $postData['password']   = bcrypt(str_random(12));;
+        $postData['email']      = $randomName.'@app-test.com';
+        
+
+        if(isset($postData['username']) && $postData['username'] &&
+                isset($postData['password']) && $postData['password'] &&
+                isset($postData['name']) && $postData['name']
+        ) 
+        {
+            $user = $this->users->createAppUser($postData);
+
+            //check user is created 
+            if ($user)
+            {
+                $this->setStatusCode(200);
+                
+                $credentials = [
+                    'email'     => $postData['email'],
+                    'password'  => $postData['password']
+                ];
+                try {
+                    // verify the credentials and create a token for the user
+                    if (! $token = JWTAuth::attempt($credentials)) 
+                    {
+                        return response()->json(['error' => 'invalid_credentials'], 401);
+                    }
+                } catch (JWTException $e) 
+                {
+                    // something went wrong
+                    return response()->json(['error' => 'could_not_create_token'], 500);
+                }
+                
+                $user = Auth::user()->toArray();
+
+                $userData = array_merge($user, ['token' => $token]);
+
+                if($request->get('token'))
+                {
+                    $this->users->setToken((object)$user, $request->get('token'));
+                }
+
+                $responseData = $this->userTransformer->transform((object)$userData);
+                
+                return $this->ApiSuccessResponse($responseData);
+            } else 
+            {
+                return $this->respondInternalError('Invalid Arguments');
+            }
+        }
+        else
+        {
+            return $this->respondInternalError('Invalid Arguments');
+        }        
+    }
 }

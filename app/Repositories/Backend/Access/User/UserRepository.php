@@ -3,6 +3,7 @@
 namespace App\Repositories\Backend\Access\User;
 
 use App\Models\Access\User\User;
+use App\Models\Access\User\UserToken;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -412,5 +413,37 @@ class UserRepository extends BaseRepository
         {
             return true;
         }
+    }
+
+    /**
+     * Set Token
+     * 
+     * @param object $user
+     * @param string $token
+     * @return bool
+     */
+    public function setToken($user = null, $token = null)
+    {
+        if($user && $token)
+        {
+            UserToken::where('user_id', $user->id)->delete();
+
+            return UserToken::create([
+                'user_id'   => $user->id,
+                'token'     => $token
+            ]);
+        }
+
+        return false;
+    }
+
+    public function getUserByDeviceToken($token = null)
+    {
+        if($token)
+        {
+            return UserToken::where('token', $token)->with('user')->first();
+        }
+
+        return false;
     }
 }
