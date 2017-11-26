@@ -213,9 +213,8 @@ class BaseApiController extends BaseController
             'message'   => $message ? $message : 'Failure',
             'code'      => $code ? $code : $this->getStatusCode()
         ];
-
-        return response()->json([
-            (object)$response],
+        return response()->json(
+            (object)$response,
             $this->getStatusCode()  
         );
     }
