@@ -370,7 +370,7 @@ class EloquentProductRepository extends DbRepository
     {
     	if($userId)
     	{
-    		return Cart::where('user_id', $userId)->with('product')->get();
+    		return Cart::where('user_id', $userId)->with('product')->orderBy('product_id')->get();
     	}
 
     	return false;
