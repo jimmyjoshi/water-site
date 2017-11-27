@@ -22,7 +22,9 @@ Route::group(['namespace' => 'Api',], function ()
     Route::post('login', 'UsersController@login')->name('api.login');
     Route::post('register', 'UsersController@register')->name('api.register');
     Route::post('register-guest', 'UsersController@registerAsGuest')->name('api.register-as-guest');
+    Route::post('forgotpassword', 'UsersController@forgotPassword')->name('api.forgotPassword');
     /*Route::post('verifyotp', 'UsersController@verifyOtp')->name('api.verifyotp');
+
     Route::post('resendotp', 'UsersController@resendOtp')->name('api.resendotp');
     Route::post('forgotpassword', 'UsersController@forgotPassword')->name('api.forgotPassword');
     Route::post('specializations', 'SpecializationController@specializationList')->name('api.specializationList');

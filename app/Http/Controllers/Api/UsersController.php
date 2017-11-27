@@ -237,8 +237,7 @@ class UsersController extends Controller
                 }
 
                 $responseData = $this->userTransformer->transform((object)$userData);
-                
-                return $this->ApiSuccessResponse($responseData);
+                return response()->json($responseData);
             } else 
             {
                 return $this->respondInternalError('Invalid Arguments');
@@ -248,5 +247,18 @@ class UsersController extends Controller
         {
             return $this->respondInternalError('Invalid Arguments');
         }        
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        if($request->get('email'))
+        {
+             return $this->ApiSuccessResponse([
+                    'mailSend'      => 1,
+                    'message'       => 'New Password send on Register Email Id'
+            ]);
+        }
+
+        return $this->respondInternalError('Invalid Arguments');
     }
 }
