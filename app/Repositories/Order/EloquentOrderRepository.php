@@ -129,6 +129,7 @@ class EloquentOrderRepository extends DbRepository
 		'createRoute' 	=> 'order.create',
 		'storeRoute' 	=> 'order.store',
 		'editRoute' 	=> 'order.edit',
+		'viewRoute' 	=> 'order.details',
 		'updateRoute' 	=> 'order.update',
 		'deleteRoute' 	=> 'order.destroy',
 		'dataRoute' 	=> 'order.get-list-data'

@@ -16,7 +16,7 @@ trait Attribute
 	 */
 	public function getEditButtonAttribute($routes, $prefix = 'admin')
 	{
-		return '<a href="'.route($prefix .'.'. $routes->editRoute, $this).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> ';
+		return '<a href="'.route($prefix .'.'. $routes->viewRoute, $this).'" class="btn btn-xs btn-info"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a> ';
 	}
 
 	/**

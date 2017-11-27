@@ -64,9 +64,12 @@ class AdminOrderController extends Controller
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        die('show Product');
+        $item = $this->repository->getById($id);
+
+        return view('backend.order.items')->with('item', $item);
+        
     }
 
     /**
@@ -216,6 +219,8 @@ class AdminOrderController extends Controller
 
     public function orderDetails($id, Request $request)
     {
-        dd($id);
+        $item = $this->repository->getById($id);
+
+        return view('backend.order.items')->with('item', $item);
     }
 }
