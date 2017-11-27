@@ -163,10 +163,15 @@ class APIProductController extends BaseApiController
 
             if($status)
             {
-                return $this->ApiSuccessResponse([
-                    'qtyAdded'      => $request->get('qty'),
-                    'message'       => 'Products Added to Cart'
-                    ]);
+                $userInfo   = (object) $this->getApiUserInfo();
+                $products   = $this->repository->getUserCart($userInfo->userId);
+        
+                if($products && count($products))
+                {
+                    $productData     = $this->categoryTransformer->cartData($products);
+
+                    return $this->ApiSuccessResponse($productData);
+                }
             }
         }
 

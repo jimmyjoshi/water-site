@@ -12,5 +12,6 @@ Route::group([
     Route::resource('order', 'AdminOrderController');
 
     Route::get('/', 'AdminOrderController@index')->name('order.index');
+    Route::get('/{id}', 'AdminOrderController@orderDetails')->name('order.details');
     
 });

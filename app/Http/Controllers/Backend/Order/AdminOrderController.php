@@ -66,7 +66,7 @@ class AdminOrderController extends Controller
 
     public function show()
     {
-
+        die('show Product');
     }
 
     /**
@@ -212,5 +212,10 @@ class AdminOrderController extends Controller
                 return $event->admin_action_buttons;
             })
 		    ->make(true);
+    }
+
+    public function orderDetails($id, Request $request)
+    {
+        dd($id);
     }
 }
