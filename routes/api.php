@@ -49,6 +49,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt.customauth'], function 
     Route::post('products/add-to-cart', 'APIProductController@addToCart')->name('api-product.add-to-cart');    
     Route::post('products/remove-product-from-cart', 'APIProductController@removeProductFromCart')->name('api-product.remove-product-from-cart');    
 
+    Route::get('products/wishlist-count', 'APIProductController@getWishListCount')->name('api-product.get-wish-list-count');    
     Route::any('orders/create', 'APIOrderController@create')->name('api-order.create');    
 
 });

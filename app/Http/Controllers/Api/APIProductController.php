@@ -204,4 +204,11 @@ class APIProductController extends BaseApiController
 
         return $this->setStatusCode(400)->failureResponse($error, 'Unable to Remove Product From Cart!');   
     }
+
+    public function getWishListCount(Request $request)
+    {
+        $wishListCount     = $this->categoryTransformer->wishListCount();
+
+        return $this->ApiSuccessResponse($wishListCount);
+    }
 }

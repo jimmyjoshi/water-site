@@ -30,6 +30,8 @@ class CategoryTransformer extends Transformer
 
     public function categoryData($categories)
     {
+        $user               = Auth()->user();
+        $wishlistProductIds = $user->cart->pluck('product_id')->toArray();
         $response = [];
 
         $i = 0;
@@ -41,6 +43,7 @@ class CategoryTransformer extends Transformer
                 'description'   => $category->description ? $category->description : '',
                 'categoryImage' => URL::to('/').'/uploads/category/'.$category->image,
                 'productsCount' => count($category->products),
+                'wishListCount' => isset($wishlistProductIds) ? count($wishlistProductIds) : 0,
                 'products'      => []
             ];
 
@@ -50,6 +53,7 @@ class CategoryTransformer extends Transformer
                 {
                     $response[$i]['products'][] = [
                         'productId'     => (int) $product->id,
+                        'isWishList'    => (isset($wishlistProductIds) && count($wishlistProductIds) && in_array($product->id, $wishlistProductIds)) ? 1 : 0,
                         'productTitle'  => $product->title,
                         'productPrice'  => (float) $product->price,
                         'productQty'    => (int) $product->qty,
@@ -71,12 +75,16 @@ class CategoryTransformer extends Transformer
     public function productData($products)
     {
         $response = [] ;
+        $user               = Auth()->user();
+        $wishlistProductIds = $user->cart->pluck('product_id')->toArray();
 
         foreach($products as $product)
         {
             $response[] = [
                 'productId'     => (int) $product->id,
+                 'isWishList'    => (isset($wishlistProductIds) && count($wishlistProductIds) && in_array($product->id, $wishlistProductIds)) ? 1 : 0,
                 'productTitle'  => $product->title,
+                'wishListCount' => isset($wishlistProductIds) ? count($wishlistProductIds) : 0,
                 'productPrice'  => (float) $product->price,
                 'productQty'    => (int) $product->qty,
                 'productImage'  => $product->image ? URL::to('/').'/uploads/product/'.$product->image : '',
@@ -97,6 +105,8 @@ class CategoryTransformer extends Transformer
     public function singleCategoryData($category)
     {
         $response = [];
+        $user               = Auth()->user();
+        $wishlistProductIds = $user->cart->pluck('product_id')->toArray();
 
         $response = [
                 'categoryId'    => (int) $category->id,
@@ -113,6 +123,7 @@ class CategoryTransformer extends Transformer
                 {
                     $response['products'][] = [
                         'productId'     => (int) $product->id,
+                        'isWishList'    => (isset($wishlistProductIds) && count($wishlistProductIds) && in_array($product->id, $wishlistProductIds)) ? 1 : 0,
                         'productTitle'  => $product->title,
                         'productPrice'  => (float) $product->price,
                         'productQty'    => (int) $product->qty,
@@ -161,5 +172,17 @@ class CategoryTransformer extends Transformer
             ]
         ];
 
+    }
+
+    public function wishListCount()
+    {
+        $user               = Auth()->user();
+        $wishlistProductIds = $user->cart->pluck('product_id')->toArray();        
+
+        $response = [
+            'wishListCount' => isset($wishlistProductIds) ? count($wishlistProductIds) : 0
+        ];
+        
+        return $response;
     }
 }
