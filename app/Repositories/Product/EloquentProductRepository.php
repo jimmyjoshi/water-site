@@ -143,12 +143,12 @@ class EloquentProductRepository extends DbRepository
 	 * @var array
 	 */
 	public $moduleRoutes = [
-		'listRoute' 	=> 'product.index',
-		'createRoute' 	=> 'product.create',
-		'storeRoute' 	=> 'product.store',
-		'editRoute' 	=> 'product.edit',
-		'updateRoute' 	=> 'product.update',
-		'deleteRoute' 	=> 'product.destroy',
+		'listRoute' 	=> 'products.index',
+		'createRoute' 	=> 'products.create',
+		'storeRoute' 	=> 'products.store',
+		'editRoute' 	=> 'products.edit',
+		'updateRoute' 	=> 'products.update',
+		'deleteRoute' 	=> 'products.destroy',
 		'dataRoute' 	=> 'product.get-list-data'
 	];
 
