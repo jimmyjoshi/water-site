@@ -25,6 +25,8 @@ Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
  * Namespaces indicate folder structure
  */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+
+	Route::get('products/', 'AdminProductController@index')->name('product.get-products');
     /*
      * These routes need view-backend permission
      * (good if you want to allow more than one group in the backend,
@@ -33,4 +35,5 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      * Note: Administrator has all permissions so you do not have to specify the administrator role everywhere.
      */
     includeRouteFiles(__DIR__.'/Backend/');
+
 });
