@@ -9,8 +9,8 @@ Route::group([
     /*
      * Admin Product Controller
      */
-    Route::resource('products', 'AdminProductController');
+    Route::resource('product', 'AdminProductController');
 
-    Route::get('products', 'AdminProductController@index')->name('product.index');
+    Route::get('/', 'AdminProductController@index')->name('product.index');
     
 });

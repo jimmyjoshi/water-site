@@ -26,7 +26,7 @@ Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
  */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
 
-	Route::get('products/', 'AdminProductController@index')->name('product.get-products');
+	//Route::get('products/', 'AdminProductController@index')->name('product.get-products');
     /*
      * These routes need view-backend permission
      * (good if you want to allow more than one group in the backend,
