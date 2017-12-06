@@ -19,6 +19,15 @@
 
 <div class="box-body">
     <div class="form-group">
+        {{ Form::label('product_code', 'Product Code :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::text('product_code', null, ['class' => 'form-control', 'placeholder' => 'Product Code', 'required' => 'required']) }}
+        </div>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="form-group">
         {{ Form::label('price', 'Price :', ['class' => 'col-lg-2 control-label']) }}
         <div class="col-lg-10">
             {{ Form::number('price', isset($item->price) ? $item->price : 0.00, ['min' => 0.00, 'step' => 0.1, 'class' => 'form-control', 'placeholder' => 'Price', 'required' => 'required']) }}

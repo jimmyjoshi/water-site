@@ -28,6 +28,7 @@ class Product extends BaseModel
         'category_id',
         'title',
         'description',
+        'product_code',
         'price',
         'qty',
         'image',
