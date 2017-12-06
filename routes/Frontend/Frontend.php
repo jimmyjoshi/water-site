@@ -5,6 +5,9 @@
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('/', 'FrontendController@index')->name('index');
+Route::get('/jewel-categories', 'FrontendController@jewelCategories')->name('jewel-categories');
+Route::get('/jewel-products', 'FrontendController@jewelProducts')->name('jewel-products');
+Route::get('/product-details/{id}', 'FrontendController@productDetails')->name('jewel-products-details');
 Route::get('macros', 'FrontendController@macros')->name('macros');
 
 /*
