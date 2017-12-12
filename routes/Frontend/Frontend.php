@@ -21,6 +21,13 @@ Route::group(['middleware' => 'auth'], function () {
          */
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+        Route::get('cart', 'DashboardController@showCart')->name('show-cart');
+
+
+        Route::post('add-product-to-cart', 'DashboardController@addProductToCart')->name('add-product-to-cart');
+            
+        Route::post('remove-product-from-cart', 'DashboardController@removeProductToCart')->name('remove-product-from-cart');
+
         /*
          * User Account Specific
          */

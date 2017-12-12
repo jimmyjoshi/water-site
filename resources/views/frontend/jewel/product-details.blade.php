@@ -35,8 +35,14 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col col-auto"><a href="#" class="btn btn-custom">Add to wishlist</a> </div>
-                    <div class="col col-auto"><a href="#" class="btn btn-custom">Add to cart</a> </div>
+                    @if(isset(access()->user()->id))
+                        <div class="col col-auto">
+                            <a href="javascript:void(0);" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
+                                Add to wishlist
+                            </a>
+                        </div>
+                    @endif
+                    {{-- <div class="col col-auto"><a href="#" class="btn btn-custom">Add to cart</a> </div> --}}
                 </div>
 
                 <div id="accordion" role="tablist" class="mt-4">
@@ -71,13 +77,43 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/slick.min.js')}}"></script>
 
 <script type="text/javascript">
+
+    jQuery(document).on('click', '.add-product-to-cart', function(element)
+    {   
+        var productId = element.target.getAttribute('data-id');
+
+        jQuery.ajax(
+        {
+            url: "{!! route('frontend.user.add-product-to-cart') !!}",
+            method: "POST",
+            dataType: 'json',
+            data: {
+                'productId': productId
+            },
+            success: function(data)
+            {
+                if(data.status == true)
+                {
+                    alert("Product Added to Cart Successfully!");
+                    return true;
+                }
+
+                alert("Somethin went Wront !");
+                return false;
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+    });
 
     var slick = jQuery('.stack').slick(
         {

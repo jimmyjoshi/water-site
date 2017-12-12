@@ -1,16 +1,19 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <div class="row">
+<body class="home-bg">
 
-        <div class="col-md-8 col-md-offset-2">
+@include('frontend.jewel.menu')
 
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('labels.frontend.auth.register_box_title') }}</div>
+<main role="main" id="main-container">
+    <div class="container h-100">
+        <div class="row h-100 d-flex align-items-center form-block">
+            <div class="col-lg-5">
+                <h1 class="mb-3">Sign in</h1>
+                <div class="details-des">
 
-                <div class="panel-body">
 
-                    {{ Form::open(['route' => 'frontend.auth.register', 'class' => 'form-horizontal']) }}
+                     {{ Form::open(['route' => 'frontend.auth.register', 'class' => 'form-horizontal']) }}
 
                     <div class="form-group">
                         {{ Form::label('name', trans('validation.attributes.frontend.name'), ['class' => 'col-md-4 control-label']) }}
@@ -57,17 +60,67 @@
 
                     {{ Form::close() }}
 
-                </div><!-- panel body -->
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 mb-4">
+                        <input type="text" placeholder="Eamil Address" class="form-control">
+                    </div>
+                    <div class="col-lg-12 mb-4">
+                        <input type="text" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="col-lg-12 mb-4 mt-4"><a href="#" class="btn-form">Log in</a> </div>
+                    <div class="col-lg-12 mb-4 mt-2"><a href="#" class="forgot">Forgot Password?</a> </div>
+                </div>
 
-            </div><!-- panel -->
+            </div>
+            <div class="col-lg-1 h-100 d-flex align-items-center pd-sap">
+                <div class="product-detail-box"></div></div>
+            <div class="col-lg-6 pt-5 pt-lg-0">
+                <img src="images/logo.png" alt="">
+                <h1 class="mt-4 mb-3">Sign up</h1>
+                <div class="details-des">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                <div class="row mt-4">
+                    <div class="col col-auto my-2"><a href="#" class="btn-form">Sign up</a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-        </div><!-- col-md-8 -->
 
-    </div><!-- row -->
+@include('frontend.jewel.footer')
+
 @endsection
 
-@section('after-scripts')
-    @if (config('access.captcha.registration'))
-        {!! Captcha::script() !!}
-    @endif
+@section('footer-js')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/slick.min.js')}}"></script>
+
+<script type="text/javascript">
+
+    var slick = jQuery('.stack').slick(
+        {
+            centerPadding: '50px',
+            centerMode: true,
+            infinite: true,
+            arrows: true,
+            draggable: false,
+            touchMove: true,
+            variableWidth: true,
+            dots: false,
+            //swipeToSlide: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            focusOnSelect: true,
+            mobileFirst: true
+        });
+
+</script>
+
 @endsection

@@ -49,15 +49,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('frontend.index') !!}"><img src="images/cart_icon.png" alt=""></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('frontend.index') !!}">Signin</a>
-                            </li>
-                            <li class="nav-item sap">
-                                <a class="nav-link" href="{!! route('frontend.index') !!}">|</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('frontend.index') !!}">Signup</a>
-                            </li>
+                            @if(! isset(access()->user()->id))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! route('frontend.login') !!}">Signin</a>
+                                </li>
+                                <li class="nav-item sap">
+                                    <a class="nav-link" href="{!! route('frontend.index') !!}">|</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! route('frontend.index') !!}">Signup</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! route('frontend.user.show-cart') !!}">Cart</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </nav>
