@@ -36,11 +36,17 @@
 
                 <div class="row mt-4">
                     @if(isset(access()->user()->id))
-                        <div class="col col-auto">
-                            <a href="javascript:void(0);" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
-                                Add to wishlist
-                            </a>
-                        </div>
+                        @if(count(access()->user()->cart->where('product_id', $product->id)) == 0 )
+                            <div class="col col-auto">
+                                <a href="javascript:void(0);" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
+                                    Add to wishlist
+                                </a>
+                            </div>
+                        @else
+                            <div class="col col-auto">
+                                Already Added to Cart
+                            </div>
+                        @endif
                     @endif
                     {{-- <div class="col col-auto"><a href="#" class="btn btn-custom">Add to cart</a> </div> --}}
                 </div>

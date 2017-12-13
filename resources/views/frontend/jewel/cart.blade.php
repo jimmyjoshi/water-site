@@ -54,10 +54,11 @@
                                         </td> 
                                         <td>
                                         <select class="small_select" id="productQty-{{ $cart->product->id }}">
-                                          <option value="1">1</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                          <option value="4">4</option>
+
+                                          <option {{ ($cart->qty == 1) ? 'selected="selected"' : '' }} value="1">1</option>
+                                          <option {{ ($cart->qty == 2) ? 'selected="selected"' : '' }} value="2">2</option>
+                                          <option {{ ($cart->qty == 3) ? 'selected="selected"' : '' }} value="3">3</option>
+                                          <option {{ ($cart->qty == 4) ? 'selected="selected"' : '' }} value="4">4</option>
                                         </select>
                                         </td> 
                                         <td><div class="price">$ {{ $cart->product->price }}</div></td> 
@@ -73,6 +74,9 @@
             </div>
             <div class="col-lg-12">
                 <div class="total-amount-box">Total Amount <span>$ <?php echo $total;?></span></div>
+                @if(count($user->cart))
+                    <a href="javascript:void(0);" id="createOrderBtn" class="btn btn-primary"> Place an Order </a>
+                @endif
             </div>
             
         </div>
@@ -126,27 +130,56 @@ jQuery(document).on('click', '.remove-product', function(element)
         });
     });
 
+
+jQuery("#createOrderBtn").on('click', function()
+{
+    jQuery.ajax(
+    {
+        url: "{!! route('frontend.user.create-order') !!}",
+        method: "POST",
+        dataType: 'json',
+        data: {
+            
+        },
+        success: function(data)
+        {
+            if(data.status == true)
+            {
+
+                alert("Order Created Successfully !");
+                window.location.reload();
+                return true;
+            }
+
+            alert("Somethin went Wront !");
+            return false;
+        },
+        error: function(data)
+        {
+            console.log(data);
+        }
+    });
+})
+
 jQuery(document).on('click', '.update-cart', function(element)
     {   
-        var productId = element.target.getAttribute('data-id');
-
-        alert(jQuery("#productQty-"+productId ).val());
-        return;
+        var productId   = element.target.getAttribute('data-id'),
+            productQty  = jQuery("#productQty-"+productId ).val();
 
         jQuery.ajax(
         {
-            url: "{!! route('frontend.user.remove-product-from-cart') !!}",
+            url: "{!! route('frontend.user.add-product-to-cart') !!}",
             method: "POST",
             dataType: 'json',
             data: {
-                'productId': productId
+                productId:  productId,
+                productQty: productQty
             },
             success: function(data)
             {
                 if(data.status == true)
                 {
-                    alert("Product Removed From Cart Successfully!");
-                    jQuery("#cartPId-"+productId).html('');
+                    alert("Product Quantity Updated Successfully!");
                     return true;
                 }
 

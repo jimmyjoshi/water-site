@@ -51,7 +51,7 @@
                             </li>
                             @if(! isset(access()->user()->id))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('frontend.login') !!}">Signin</a>
+                                    <a class="nav-link" href="{!! route('frontend.auth.login') !!}">Signin</a>
                                 </li>
                                 <li class="nav-item sap">
                                     <a class="nav-link" href="{!! route('frontend.index') !!}">|</a>
@@ -62,6 +62,9 @@
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="{!! route('frontend.user.show-cart') !!}">Cart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! route('frontend.auth.logout') !!}">Logout</a>
                                 </li>
                             @endif
                         </ul>

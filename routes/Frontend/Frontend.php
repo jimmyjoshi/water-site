@@ -28,6 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
             
         Route::post('remove-product-from-cart', 'DashboardController@removeProductToCart')->name('remove-product-from-cart');
 
+        Route::any('create-order', 'DashboardController@createOrder')->name('create-order');
+
+        
+
         /*
          * User Account Specific
          */

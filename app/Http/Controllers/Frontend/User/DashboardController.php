@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Product\EloquentProductRepository;
+use App\Repositories\Order\EloquentOrderRepository;
 
 /**
  * Class DashboardController.
@@ -27,9 +28,11 @@ class DashboardController extends Controller
 
     public function addProductToCart(Request $request)
     {
+    	
     	$user 		= access()->user();
+    	$productQty = $request->get('productQty') ? $request->get('productQty') : 1;
     	$repository = new EloquentProductRepository;
-    	$status 	= $repository->addToCart($user->id, $request->get('productId'), 1);
+    	$status 	= $repository->addToCart($user->id, $request->get('productId'), $productQty);
 
         if($status)
         {
@@ -57,6 +60,28 @@ class DashboardController extends Controller
         }
     	
     	return response()->json((object) [
+                    'status'    => false
+            ], 200);
+    }
+
+    public function createOrder(Request $request)
+    {
+        $userInfo = Auth()->user();
+
+        if($userInfo->cart)
+        {
+        	$repository = new EloquentOrderRepository;
+            $orderInfo 	= $repository->cartToOrder($userInfo, $userInfo->cart);
+
+            if(isset($orderInfo) && $orderInfo)
+            {
+                return response()->json((object) [
+                    'status'    => true
+                ], 200);
+            }
+        }
+
+        return response()->json((object) [
                     'status'    => false
             ], 200);
     }
