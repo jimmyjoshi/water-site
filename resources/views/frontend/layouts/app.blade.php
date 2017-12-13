@@ -44,7 +44,7 @@
             @include('includes.partials.logged-in-as')
             
 
-            <div class="container">
+            <div class="container-fluid1">
                 @include('includes.partials.messages')
 
 <!-- Bootstrap core JavaScript

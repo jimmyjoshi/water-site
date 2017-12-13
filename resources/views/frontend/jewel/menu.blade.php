@@ -1,21 +1,20 @@
 <header id="header">
     <div class="container-fluid">
         <div class="row d-flex align-items-center">
-            <div class="col-md text-center text-md-left">
+            <div class="col-sm text-center text-md-left">
             <input type="text" placeholder="Enter Keyword" class="global-search">
             </div>
-            <div class="col-md text-center">
-                <a href="#">
-                    <img src="{{ URL::to('/').'/images/logo.png'}}" alt="">
-                    
-                </a>
+            <div class="col-sm text-center logo">
+                <a href="#"><img src="images/logo.png" alt="logo"> </a>
             </div>
-            <div class="col-md text-center text-md-right ">
+            <div class="col-sm text-center text-md-right ">
                 <ul class="list-inline d-inline-block m-0">
                     <li><i class="flag en-flag"></i>English</li>
                 </ul>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-dark">
