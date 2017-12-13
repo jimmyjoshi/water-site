@@ -51,13 +51,7 @@
                             </li>
                             @if(! isset(access()->user()->id))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('frontend.auth.login') !!}">Signin</a>
-                                </li>
-                                <li class="nav-item sap">
-                                    <a class="nav-link" href="{!! route('frontend.index') !!}">|</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('frontend.index') !!}">Signup</a>
+                                    <a class="nav-link" href="{!! route('frontend.auth.login') !!}">Signin|Signup</a>
                                 </li>
                             @else
                                 <li class="nav-item">

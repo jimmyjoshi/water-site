@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            {{ Form::submit(trans('labels.frontend.auth.login_button'), ['class' => 'btn btn-primary', 'style' => 'margin-right:15px']) }}
+                            {{ Form::submit(trans('labels.frontend.auth.login_button'), ['class' => 'btn-form', 'style' => 'margin-right:15px']) }}
 
                             {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password')) }}
                         </div><!--col-md-6-->
@@ -50,16 +50,7 @@
                     {{ Form::close() }}
 
                 </div>
-                <div class="row mt-4">
-                    <div class="col-lg-12 mb-4">
-                        <input type="text" placeholder="Eamil Address" class="form-control">
-                    </div>
-                    <div class="col-lg-12 mb-4">
-                        <input type="text" placeholder="Password" class="form-control">
-                    </div>
-                    <div class="col-lg-12 mb-4 mt-4"><a href="#" class="btn-form">Log in</a> </div>
-                    <div class="col-lg-12 mb-4 mt-2"><a href="#" class="forgot">Forgot Password?</a> </div>
-                </div>
+               
 
             </div>
             <div class="col-lg-1 h-100 d-flex align-items-center pd-sap">
@@ -67,9 +58,51 @@
             <div class="col-lg-6 pt-5 pt-lg-0">
                 <img src="images/logo.png" alt="">
                 <h1 class="mt-4 mb-3">Sign up</h1>
-                <div class="details-des">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-                <div class="row mt-4">
-                    <div class="col col-auto my-2"><a href="#" class="btn-form">Sign up</a> </div>
+                <div class="details-des">
+                    
+                    {{ Form::open(['route' => 'frontend.auth.register', 'class' => 'form-horizontal']) }}
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            {{ Form::input('name', 'name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            {{ Form::input('email', 'email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            {{ Form::input('password', 'password', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.password')]) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            {{ Form::input('password', 'password_confirmation', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.password_confirmation')]) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    @if (config('access.captcha.registration'))
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                {!! Form::captcha() !!}
+                                {{ Form::hidden('captcha_status', 'true') }}
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+                    @endif
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            {{ Form::submit('Sign up', ['class' => 'btn-form']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    {{ Form::close() }}
+
                 </div>
             </div>
         </div>

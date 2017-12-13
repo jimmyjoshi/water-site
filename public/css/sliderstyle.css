@@ -25,15 +25,7 @@
 	transition: all 0.5s;
 	transform: scale(1);
 }
-h1 {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	height: 390px;
-	padding: 0 78px;
-	margin: 0 auto;
-	width: 460px;
-}
+
 .slider {
 	width: 120px;
 	margin: 0 auto;
