@@ -35,20 +35,24 @@
                                 @foreach($user->cart as $cart)
                                     <tr id="cartPId-{{ $cart->product->id }}"> 
                                         <td>
-                                            <span><img src="images/jw-img1.jpg" alt=""></span>
+                                            <span>
+                                                {{ Html::image('uploads/product/'.$cart->product->image, $cart->product->title) }}
+                                            
+                                            </span>
                                             <p>
                                                 <h3>{{ $cart->product->title }}</h3>
-                                                Huggies 18 -Karat gold diamond</p>
+                                                {{ $cart->product->description }}</p>
                                         </td>  
                                         <td>
                                             <div class="edit">
                                                 <a href="javascript:void(0);" class="remove-product" data-id="{{ $cart->product->id }} ">
-                                                    <img src="images/remove-btn.png" alt=""> Remove
+                                                    {{ Html::image('images/remove-btn.png', 'remove', ['data-id' => $cart->product->id]) }}Remove
                                                 </a>
                                             </div>
                                             <div class="edit">
                                                 <a href="javascript:void(0);" class="update-cart" data-id="{{ $cart->product->id }} ">
-                                                    <img src="images/edit-btn.png" alt=""> Edit
+                                                    {{ Html::image('images/edit-btn.png', 'edit', ['data-id' => $cart->product->id]) }}
+                                                    Edit
                                                 </a>
                                             </div>
                                         </td> 
@@ -75,7 +79,9 @@
             <div class="col-lg-12">
                 <div class="total-amount-box">Total Amount <span>$ <?php echo $total;?></span></div>
                 @if(count($user->cart))
-                    <a href="javascript:void(0);" id="createOrderBtn" class="btn btn-primary"> Place an Order </a>
+                    <div class="text-right">
+                        <a href="javascript:void(0);" id="createOrderBtn" class="btn btn-primary"> Place an Order </a>
+                    </div>
                 @endif
             </div>
             
