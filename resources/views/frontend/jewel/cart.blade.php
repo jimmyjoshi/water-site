@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<body class="inner-bg>
+<body class="inner-bg">
 
 @include('frontend.jewel.menu')
 
