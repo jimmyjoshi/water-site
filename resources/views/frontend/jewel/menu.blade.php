@@ -5,7 +5,9 @@
             <input type="text" placeholder="Enter Keyword" class="global-search">
             </div>
             <div class="col-sm text-center logo">
-                <a href="#"><img src="images/logo.png" alt="logo"> </a>
+                <a href="{!! url('/') !!}">
+                    {{ Html::image('images/logo.png', 'logo') }}
+                </a>
             </div>
             <div class="col-sm text-center text-md-right ">
                 <ul class="list-inline d-inline-block m-0">
