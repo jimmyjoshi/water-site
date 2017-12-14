@@ -75,12 +75,21 @@
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/role*')) }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/access/user/manage-tier')) }}">
+                        <a href="{{ route('admin.access.manage-tier') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Tier Permission Manager</span>
+                        </a>
+                    </li>
+
+                    {{-- <li class="{{ active_class(Active::checkUriPattern('admin/access/role*')) }}">
                         <a href="{{ route('admin.access.role.index') }}">
                             <i class="fa fa-circle-o"></i>
                             <span>{{ trans('labels.backend.access.roles.management') }}</span>
                         </a>
-                    </li>
+                    </li> --}}
+
+
                 </ul>
             </li>
             @endauth

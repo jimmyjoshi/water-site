@@ -38,6 +38,14 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
+                 <div class="form-group">
+                    {{ Form::label('user_level', 'User Tier', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::select('user_level', [1 =>'Tier 1', 2 => 'Tier 2'], null, ['class' => 'form-control']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
                 @if ($user->id != 1)
                     <div class="form-group">
                         {{ Form::label('status', trans('validation.attributes.backend.access.users.active'), ['class' => 'col-lg-2 control-label']) }}

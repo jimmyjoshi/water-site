@@ -9,6 +9,8 @@ use App\Repositories\Backend\Access\User\UserRepository;
 use App\Http\Requests\Backend\Access\User\StoreUserRequest;
 use App\Http\Requests\Backend\Access\User\ManageUserRequest;
 use App\Http\Requests\Backend\Access\User\UpdateUserRequest;
+use Illuminate\Http\Request;
+use App\Repositories\Category\EloquentCategoryRepository;
 
 /**
  * Class UserController.
@@ -118,5 +120,29 @@ class UserController extends Controller
         $this->users->delete($user);
 
         return redirect()->route('admin.access.user.deleted')->withFlashSuccess(trans('alerts.backend.users.deleted'));
+    }
+
+    public function manageTierPermission(Request $request)
+    {
+        $repository = new EloquentCategoryRepository;
+        
+        return view('backend.access.manage-tier-permision')->with('repository', $repository);
+    }
+
+    public function updateTierPermission(Request $request)
+    {
+        $repository = new EloquentCategoryRepository;
+        $status     = $repository->updateTierPermissions($request->all());
+
+        if($status)
+        {
+            return response()->json((object) [
+                    'status'    => true
+                ], 200);
+        }
+
+        return response()->json((object) [
+                    'status'    => false
+            ], 200);
     }
 }

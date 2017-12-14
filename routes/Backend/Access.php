@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * All route names are prefixed with 'admin.access'.
  */
@@ -9,6 +11,8 @@ Route::group([
     'namespace'  => 'Access',
 ], function () {
 
+
+
     /*
      * User Management
      */
@@ -16,6 +20,10 @@ Route::group([
         'middleware' => 'access.routeNeedsRole:1',
     ], function () {
         Route::group(['namespace' => 'User'], function () {
+            
+            Route::get('user/manage-tier', 'UserController@manageTierPermission')->name('manage-tier');
+            Route::post('user/update-permission-tier', 'UserController@updateTierPermission')->name('update-permission-tier');
+
             /*
              * For DataTables
              */
@@ -31,7 +39,8 @@ Route::group([
              * User CRUD
              */
             Route::resource('user', 'UserController');
-
+            
+            
             /*
              * Specific User
              */

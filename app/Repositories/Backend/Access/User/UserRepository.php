@@ -158,7 +158,7 @@ class UserRepository extends BaseRepository
         $roles = $input['roles'];
 
         $this->checkUserByEmail($data, $user);
-
+        
         DB::transaction(function () use ($user, $data, $roles) {
             if ($user->update($data)) {
                 //For whatever reason this just wont work in the above call, so a second is needed for now

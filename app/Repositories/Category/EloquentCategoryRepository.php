@@ -5,6 +5,7 @@ use App\Models\Product\Product;
 use App\Models\Access\User\User;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
+use App\Models\TierLevel\TierLevel;
 
 class EloquentCategoryRepository extends DbRepository
 {
@@ -309,5 +310,46 @@ class EloquentCategoryRepository extends DbRepository
     	unset($clientColumns['username']);
     	
     	return json_encode($this->setTableStructure($clientColumns));
+    }
+
+    public function getFirstLevelCategories()
+    {
+    	return TierLevel::where('user_level', 1)->get();
+    }
+
+    public function getSecondLevelCategories()
+    {
+    	return TierLevel::where('user_level', 2)->get();
+    }
+
+    public function updateTierPermissions($input = array())
+    {
+    	$tier = $input['tierLevel'];
+
+		$values = explode(',', $input['values']);
+
+		if(count($values) < 1)
+		{
+			return true;
+		}
+
+    	TierLevel::where('user_level', $tier)->delete();
+    	
+		$insertData = [];
+
+		foreach($values as $value)
+		{
+			$insertData[] = [
+				'user_level' 	=> 1,
+				'category_id' 	=> $value
+			];
+		}
+
+		if(count($insertData))
+		{
+			return TierLevel::insert($insertData);
+		}
+
+		return true;
     }
 }

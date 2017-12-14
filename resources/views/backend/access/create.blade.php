@@ -39,6 +39,14 @@
                 </div><!--form control-->
 
                 <div class="form-group">
+                    {{ Form::label('user_level', 'User Tier', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::select('user_level', [1 =>'Tier 1', 2 => 'Tier 2'], null, ['class' => 'form-control']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
                     {{ Form::label('password', trans('validation.attributes.backend.access.users.password'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
