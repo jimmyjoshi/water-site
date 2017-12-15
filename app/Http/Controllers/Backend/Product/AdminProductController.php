@@ -207,6 +207,7 @@ class AdminProductController extends Controller
             ->escapeColumns(['category', 'sort'])
             ->escapeColumns(['price', 'sort'])
             ->escapeColumns(['qty', 'sort'])
+            ->escapeColumns(['description', 'sort'])
             ->addColumn('image', function ($item) 
             {
                 
