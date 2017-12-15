@@ -46,6 +46,16 @@
 
 <div class="box-body">
     <div class="form-group">
+        {{ Form::label('description', 'Description :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::textarea('description', null, ['rows' => 4, 'cols' => 40, 'class' => 'form-control']) }}
+        </div>
+    </div>
+</div>
+
+
+<div class="box-body">
+    <div class="form-group">
         {{ Form::label('image', 'Select Image :', ['class' => 'col-lg-2 control-label']) }}
 
         <div class="col-lg-10">
