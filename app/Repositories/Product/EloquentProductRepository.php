@@ -34,6 +34,7 @@ class EloquentProductRepository extends DbRepository
 		'price' 		=> 'Price',
 		'qty' 			=> 'Qty',
 		'product_code' 	=> 'Product Code',
+		'description' 	=> 'Description',
 		'image' 		=> 'Image',
 		'image1' 		=> 'Image 1',
 		'image2' 		=> 'Image 2',
@@ -74,6 +75,12 @@ class EloquentProductRepository extends DbRepository
 		'product_code' => [
 			'data' 			=> 'product_code',
 			'name' 			=> 'product_code',
+			'searchable' 	=> true, 
+			'sortable'		=> true
+		],
+		'description' => [
+			'data' 			=> 'description',
+			'name' 			=> 'description',
 			'searchable' 	=> true, 
 			'sortable'		=> true
 		],
@@ -285,6 +292,7 @@ class EloquentProductRepository extends DbRepository
 			$this->model->getTable().'.title',
 			$this->model->getTable().'.price',
 			$this->model->getTable().'.product_code',
+			$this->model->getTable().'.description',
 			$this->model->getTable().'.qty',
 			$this->model->getTable().'.image',
 			$this->model->getTable().'.image1',
