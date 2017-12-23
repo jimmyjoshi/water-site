@@ -25,13 +25,14 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Tier 1</a>
-                    </li>
+                    @foreach($tiers as $tier)
 
-                    <li role="presentation">
-                        <a href="#history" aria-controls="history" role="tab" data-toggle="tab">Tier 2</a>
-                    </li>
+                        @php $active = ($tier->id == 1) ? 'active' : ''; @endphp
+
+                        <li role="presentation" class="{{ $active }}">
+                            <a href="#{{ $tier->id }}" aria-controls="overview" role="tab" data-toggle="tab">{{ $tier->title }}</a>
+                        </li>
+                    @endforeach
                 </ul>
 
                 <div class="tab-content">
@@ -39,40 +40,29 @@
                     $categories = $repository->getAll();
                     $firstTier  = $repository->getFirstLevelCategories()->pluck('category_id')->toArray();
                     $secondTier  = $repository->getSecondLevelCategories()->pluck('category_id')->toArray();
-                    /*dd($firstTier);*/
                 @endphp
-                    <div role="tabpanel" class="tab-pane mt-30 active" id="overview">
-                        <div class="row">
-                           @foreach($categories as $category)
-                                <div class="col-md-3">
-                                    <label>
-                                        <input class="leavel-one-permission" type="checkbox" {{ in_array($category->id, $firstTier) ? 'checked="checked"' : '' }}  name="leavel_one" value="{{ $category->id }}">{{ $category->title }}
-                                    </label>
-                                </div>
-                           @endforeach
-                           <div class="col-md-12 text-center">
-                                <a href="javascript:void(0);" id="tierOneUpdate" class="btn btn-success lg">Update Tier Permission</a>
-                           </div>
-                        </div>
-                    </div><!--tab overview profile-->
 
-                    <div role="tabpanel" class="tab-pane mt-30" id="history">
-                        <div class="row">
-                           @foreach($categories as $category)
-                                <div class="col-md-3">
-                                <label>
-                                    <input class="leavel-two-permission" type="checkbox" {{ in_array($category->id, $secondTier) ? 'checked="checked"' : '' }}  name="leavel_one" value="{{ $category->id }}">{{ $category->title }}
-                                </label>
-                                </div>
-                           @endforeach
-                            <div class="col-md-12 text-center">
-                                <a href="javascript:void(0);" id="tierTwoUpdate" class="btn btn-success lg">Update Tier Permission</a>
-                           </div>
-                           
+                    @foreach($tiers as $tier)
+                        @php
+                            $active         = ($tier->id == 1) ? 'active' : ''; 
+                            $tierPermission = $repository->getPermissionByTier($tier->id)->pluck('category_id')->toArray();
+                        @endphp
+                        <div role="tabpanel" class="tab-pane mt-30 {{$active}}" id="{{ $tier->id }}">
+                            <div class="row">
+                               @foreach($categories as $category)
+                                    <div class="col-md-3">
+                                        <label>
+                                            <input class="level-permissions-{{ $tier->id }}" type="checkbox" {{ in_array($category->id, $tierPermission) ? 'checked="checked"' : '' }}  name="{{ $tier->title }}" value="{{ $category->id }}">{{ $category->title }}
+                                        </label>
+                                    </div>
+                               @endforeach
+                               <div class="col-md-12 text-center">
+                                    <a href="javascript:void(0);" data-id="{{ $tier->id }}" id="tierOneUpdatexx" class="btn btn-success lg tier-btn-update">Update Tier {{  $tier->title }}</a>
+                               </div>
+                            </div>
                         </div>
-                    </div><!--tab panel history-->
-
-                </div><!--tab content-->
+                    @endforeach    
+                </div>
 
             </div><!--tab panel-->
 
@@ -85,6 +75,45 @@
 
     var url = '{!! route('admin.access.update-permission-tier') !!}';
 
+    jQuery(".tier-btn-update").on('click', function(element)
+    {
+        var key = jQuery(element.target).attr('data-id');
+        console.log(key, 'test');
+
+
+        var checkedVals = jQuery('.level-permissions-'+key+':checkbox:checked').map(function() 
+        {
+            return this.value;
+        }).get();
+        
+
+        var permissions = checkedVals.join(",");
+        
+        jQuery.ajax(
+        {
+            url: url,
+            method: "POST",
+            dataType: "JSON",
+            data: {
+                values:     permissions,
+                tierLevel:  key
+            },
+            success: function(data)
+            {
+                if(data.status == true)
+                {
+                    alert("Permission Updated Succesfuly !");
+                    return true;
+                }
+                
+                alert("Somethin Went Wrong !");
+            },
+            error: function(data)
+            {
+                alert("Somethin Went Wrong !");
+            }   
+        })
+    });
     jQuery("#tierOneUpdate").on('click', function()
     {
         var checkedVals = jQuery('.leavel-one-permission:checkbox:checked').map(function() 

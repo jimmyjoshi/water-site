@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Access\User;
 
 use App\Models\Access\User\User;
+use App\Models\Tier\Tier;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Access\Role\RoleRepository;
 use App\Repositories\Backend\Access\User\UserRepository;
@@ -125,8 +126,13 @@ class UserController extends Controller
     public function manageTierPermission(Request $request)
     {
         $repository = new EloquentCategoryRepository;
-        
-        return view('backend.access.manage-tier-permision')->with('repository', $repository);
+        $tierModel  = new Tier;
+        $tiers      = $tierModel->all();
+
+        return view('backend.access.manage-tier-permision')->with([
+            'repository'    => $repository,
+            'tiers'         => $tiers
+        ]);
     }
 
     public function updateTierPermission(Request $request)

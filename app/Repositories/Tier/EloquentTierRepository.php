@@ -1,13 +1,12 @@
-<?php namespace App\Repositories\Category;
+<?php namespace App\Repositories\Tier;
 
-use App\Models\Category\Category;
-use App\Models\Product\Product;
+use App\Models\Tier\Tier;
 use App\Models\Access\User\User;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
-use App\Models\TierLevel\TierLevel;
+use App\Models\Cart\Cart;
 
-class EloquentCategoryRepository extends DbRepository
+class EloquentTierRepository extends DbRepository
 {
 	/**
 	 * Event Model
@@ -21,7 +20,7 @@ class EloquentCategoryRepository extends DbRepository
 	 * 
 	 * @var string
 	 */
-	public $moduleTitle = 'Category';
+	public $moduleTitle = 'Tier';
 
 	/**
 	 * Table Headers
@@ -30,8 +29,6 @@ class EloquentCategoryRepository extends DbRepository
 	 */
 	public $tableHeaders = [
 		'title' 		=> 'Title',
-		'productscount' => 'Products Count',
-		'image' 		=> 'Image',
 		'actions' 		=> 'Actions'
 	];
 
@@ -46,18 +43,6 @@ class EloquentCategoryRepository extends DbRepository
 			'name' 			=> 'title',
 			'searchable' 	=> true, 
 			'sortable'		=> true
-		],
-		'productscount' => [
-			'data' 			=> 'productscount',
-			'name' 			=> 'productscount',
-			'searchable' 	=> true, 
-			'sortable'		=> true
-		],
-		'image' => [
-			'data' 			=> 'image',
-			'name' 			=> 'image',
-			'searchable' 	=> false, 
-			'sortable'		=> false
 		],
 		'actions' => [
 			'data' 			=> 'actions',
@@ -108,13 +93,13 @@ class EloquentCategoryRepository extends DbRepository
 	 * @var array
 	 */
 	public $moduleRoutes = [
-		'listRoute' 	=> 'category.index',
-		'createRoute' 	=> 'category.create',
-		'storeRoute' 	=> 'category.store',
-		'editRoute' 	=> 'category.edit',
-		'updateRoute' 	=> 'category.update',
-		'deleteRoute' 	=> 'category.destroy',
-		'dataRoute' 	=> 'category.get-list-data'
+		'listRoute' 	=> 'tiers.index',
+		'createRoute' 	=> 'tiers.create',
+		'storeRoute' 	=> 'tiers.store',
+		'editRoute' 	=> 'tiers.edit',
+		'updateRoute' 	=> 'tiers.update',
+		'deleteRoute' 	=> 'tiers.destroy',
+		'dataRoute' 	=> 'tiers.get-list-data'
 	];
 
 	/**
@@ -123,10 +108,10 @@ class EloquentCategoryRepository extends DbRepository
 	 * @var array
 	 */
 	public $moduleViews = [
-		'listView' 		=> 'category.index',
-		'createView' 	=> 'category.create',
-		'editView' 		=> 'category.edit',
-		'deleteView' 	=> 'category.destroy',
+		'listView' 		=> 'tier.index',
+		'createView' 	=> 'tier.create',
+		'editView' 		=> 'tier.edit',
+		'deleteView' 	=> 'tier.destroy',
 	];
 
 	/**
@@ -135,8 +120,7 @@ class EloquentCategoryRepository extends DbRepository
 	 */
 	public function __construct()
 	{
-		$this->model 		= new Category;
-		$this->productModel = new Product;
+		$this->model = new Tier;
 	}
 
 	/**
@@ -207,7 +191,12 @@ class EloquentCategoryRepository extends DbRepository
      */
     public function getAll($orderBy = 'id', $sort = 'asc')
     {
-        return $this->model->all();
+    	if(isset($orderBy) && $sort)
+    	{
+    		return $this->model->orderBy($orderBy, $sort)->get();	
+    	}
+
+    	return $this->model->all();
     }
 
 	/**
@@ -236,7 +225,6 @@ class EloquentCategoryRepository extends DbRepository
     	return [
 			$this->model->getTable().'.id as id',
 			$this->model->getTable().'.title',
-			$this->model->getTable().'.image',
 		];
     }
 
@@ -245,8 +233,7 @@ class EloquentCategoryRepository extends DbRepository
      */
     public function getForDataTable()
     {
-    	return  $this->model->select($this->getTableFields())
-    				->get();
+    	return $this->model->select($this->getTableFields())->get();
         
     }
 
@@ -310,51 +297,5 @@ class EloquentCategoryRepository extends DbRepository
     	unset($clientColumns['username']);
     	
     	return json_encode($this->setTableStructure($clientColumns));
-    }
-
-    public function getPermissionByTier($tierId)
-    {
-    	return TierLevel::where('user_level', $tierId)->get();	
-    }
-
-    public function getFirstLevelCategories()
-    {
-    	return TierLevel::where('user_level', 1)->get();
-    }
-
-    public function getSecondLevelCategories()
-    {
-    	return TierLevel::where('user_level', 2)->get();
-    }
-
-    public function updateTierPermissions($input = array())
-    {
-    	$tier = $input['tierLevel'];
-
-		$values = explode(',', $input['values']);
-
-		if(count($values) < 1)
-		{
-			return true;
-		}
-
-    	TierLevel::where('user_level', $tier)->delete();
-    	
-		$insertData = [];
-
-		foreach($values as $value)
-		{
-			$insertData[] = [
-				'user_level' 	=> $tier,
-				'category_id' 	=> $value
-			];
-		}
-
-		if(count($insertData))
-		{
-			return TierLevel::insert($insertData);
-		}
-
-		return true;
     }
 }
