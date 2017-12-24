@@ -11,6 +11,8 @@ Route::group([
      */
     Route::resource('product', 'AdminProductController');
 
+    Route::post('product/bulk-upload', 'AdminProductController@bulkUpload')->name('product.bulk-upload');
+	
     Route::get('/', 'AdminProductController@index')->name('product.index');
     
 });

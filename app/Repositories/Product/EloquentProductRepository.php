@@ -5,6 +5,7 @@ use App\Models\Category\Category;
 use App\Models\Access\User\User;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
+use App\Models\BulkUpload\BulkUpload;
 use App\Models\Cart\Cart;
 
 class EloquentProductRepository extends DbRepository
@@ -163,7 +164,8 @@ class EloquentProductRepository extends DbRepository
 		'editRoute' 	=> 'product.edit',
 		'updateRoute' 	=> 'product.update',
 		'deleteRoute' 	=> 'product.destroy',
-		'dataRoute' 	=> 'product.get-list-data'
+		'dataRoute' 	=> 'product.get-list-data',
+		'bulkUploadRoute' => 'product.bulk-upload'
 	];
 
 	/**
@@ -419,5 +421,41 @@ class EloquentProductRepository extends DbRepository
     	}
 
     	return false;
+    }
+
+    public function bulkUpload($fileName, $products)
+    {
+    	BulkUpload::create([
+    		'title' => $fileName
+    	]);
+
+    	$allProductCode = $this->model->pluck('product_code')->toArray();
+
+    	unset($products[0]);
+
+    	foreach($products as $product)
+    	{
+    		if(isset($product[2]) && !in_array($product[2], $allProductCode))
+    		{
+    			$productData[] = [
+    				'category_id'	=> isset($product[0]) ? $product[0] : 1,
+    				'title' 		=> isset($product[1]) ? $product[1] : 'Product -'.$product[2],
+    				'product_code' 	=> $product[2],
+    				'qty' 			=> isset($product[4]) ? $product[4] : 0,
+    				'price' 		=> isset($product[3]) ? $product[3] : 0,
+    				'description' 	=> isset($product[5]) ? $product[5] : '',
+    				'image' 		=> isset($product[6]) ? $product[6] : 'default.png',
+    				'image1' 		=> isset($product[7]) ? $product[7] : null,
+    				'image2' 		=> isset($product[8]) ? $product[8] : null,
+    				'image3' 		=> isset($product[9]) ? $product[9] : null,
+    				'image4' 		=> isset($product[10]) ? $product[10] : null
+    			];
+    		}
+    	}
+
+    	$this->model->insert($productData);
+
+    	return count($productData);
+
     }
 }

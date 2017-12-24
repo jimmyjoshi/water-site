@@ -12,6 +12,7 @@ use App\Http\Requests\Backend\Access\User\ManageUserRequest;
 use App\Http\Requests\Backend\Access\User\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Repositories\Category\EloquentCategoryRepository;
+use App\Repositories\Tier\EloquentTierRepository;
 
 /**
  * Class UserController.
@@ -91,10 +92,14 @@ class UserController extends Controller
      */
     public function edit(User $user, ManageUserRequest $request)
     {
+        $tierRepository = new EloquentTierRepository;
+        $tiers          = $tierRepository->getAll()->pluck('title', 'id')->toArray();
+        
         return view('backend.access.edit')
             ->withUser($user)
             ->withUserRoles($user->roles->pluck('id')->all())
-            ->withRoles($this->roles->getAll());
+            ->withRoles($this->roles->getAll())
+            ->withTiers($tiers);
     }
 
     /**

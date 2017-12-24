@@ -42,7 +42,7 @@
                     {{ Form::label('user_level', 'User Tier', ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
-                        {{ Form::select('user_level', [1 =>'Tier 1', 2 => 'Tier 2'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('user_level', $tiers, null, ['class' => 'form-control']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
@@ -63,7 +63,7 @@
                         </div><!--col-lg-1-->
                     </div><!--form control-->
 
-                    <div class="form-group">
+                   <div class="form-group" style="display: none;">
                         {{ Form::label('status', trans('validation.attributes.backend.access.users.associated_roles'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-3">
@@ -83,22 +83,22 @@
                                             {{ trans('labels.backend.access.users.all_permissions') }}<br/><br/>
                                         @else
                                             @if (count($role->permissions) > 0)
-                                                <blockquote class="small">{{--
-                                            --}}@foreach ($role->permissions as $perm){{--
-                                            --}}{{$perm->display_name}}<br/>
+                                                <blockquote class="small">
+                                            @foreach ($role->permissions as $perm)
+                                            {{$perm->display_name}}<br/>
                                                     @endforeach
                                                 </blockquote>
                                             @else
                                                 {{ trans('labels.backend.access.users.no_permissions') }}<br/><br/>
                                             @endif
                                         @endif
-                                    </div><!--permission list-->
+                                    </div>
                                 @endforeach
                             @else
                                 {{ trans('labels.backend.access.users.no_roles') }}
                             @endif
-                        </div><!--col-lg-3-->
-                    </div><!--form control-->
+                        </div>
+                    </div>
                 @endif
             </div><!-- /.box-body -->
         </div><!--box-->

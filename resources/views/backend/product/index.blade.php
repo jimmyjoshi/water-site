@@ -11,13 +11,40 @@
 @endsection
 
 @section('content')
-
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">{{ isset($repository->moduleTitle) ? str_plural($repository->moduleTitle) : '' }} Listing</h3>
 
             <div class="box-tools pull-right">
                 @include('common.product.index-header-buttons', ['createRoute' => $repository->getActionRoute('createRoute')])
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+
+            <div class="col-md-2  pull-right">
+                <div id="flip" class="btn btn-success">Bulk Upload</div>
+            </div>
+            <div class="col-md-10">
+                <div id="panel" style="display: none;">
+                    {{ Form::open([
+                        'route'     => $repository->getActionRoute('bulkUploadRoute'),
+                        'class'     => 'form-horizontal',
+                        'role'      => 'form',
+                        'method'    => 'post',
+                        'files'     => true
+                    ])}}
+                    <table class="table">
+                        <tr>
+                            <td> Upload CSV File : 
+                            <p> <a target="_blank" href="{!! URL::to('uploads/bulk-upload/default.csv') !!}">Download Sample file</a></p>
+                            </td>
+                            <td> <input type="file" name="csv_file" class="form-control">
+                            <td> {{ Form::submit('Bulk Upload', ['class' => 'btn btn-success btn-xs']) }} </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -61,6 +88,12 @@
         {
             BaseCommon.Utils.setTableHeaders(document.getElementById("tableHeadersContainer"), headers);
             BaseCommon.Utils.setTableColumns(document.getElementById("items-table"), moduleConfig.getTableDataUrl, 'GET', columns);
+
+            jQuery("#flip").click(function()
+            {
+                jQuery("#panel").toggle();
+            });
+
     	});
     </script>
 @endsection

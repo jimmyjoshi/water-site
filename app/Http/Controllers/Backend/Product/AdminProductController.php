@@ -59,6 +59,7 @@ class AdminProductController extends Controller
      */
     public function index()
     {
+       
         return view($this->repository->setAdmin(true)->getModuleView('listView'))->with([
             'repository' => $this->repository
         ]);
@@ -67,6 +68,31 @@ class AdminProductController extends Controller
     public function show()
     {
 
+    }
+
+    public function bulkUpload(Request $request)
+    {
+        if($request->file('csv_file'))
+        {
+            if($request->file('csv_file')->getClientOriginalExtension() !== 'csv')
+            {
+                return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashDanger("Bulk Upload - Invalid File ! Only CSV file will be accepted. ");
+            }
+
+            $fileName  = rand(11111, 99999) . '_bulk-upload.' . $request->file('csv_file')->getClientOriginalExtension();
+            $request->file('csv_file')->move(base_path() . '/public/uploads/bulk-upload/', $fileName);
+            
+            $file       = public_path('uploads/bulk-upload/'.$fileName);
+            $products   = array_map('str_getcsv', file($file));
+
+            $status = $this->repository->bulkUpload($file, $products);
+            
+            if($status)
+            {
+                return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashSuccess('Products Uploaded');
+            }
+        }
+        return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashDanger("Something Went Wrong !");
     }
 
     /**
@@ -210,23 +236,40 @@ class AdminProductController extends Controller
             ->escapeColumns(['description', 'sort'])
             ->addColumn('image', function ($item) 
             {
-                
-                return  Html::image('/uploads/product/'.$item->image, 'Image', ['width' => 60, 'height' => 60]);    
+                if(file_exists(public_path('uploads/product/'.$item->image)))
+                {
+                    return  Html::image('/uploads/product/'.$item->image, 'Image', ['width' => 60, 'height' => 60]);    
+                }
+
+                return '';
             })
             ->addColumn('image1', function ($item) 
             {
-                
-                return  Html::image('/uploads/product/'.$item->image1, 'Image', ['width' => 60, 'height' => 60]);    
+                if(isset($item->image1) && file_exists(public_path('uploads/product/'.$item->image1)))
+                {
+                    return  Html::image('/uploads/product/'.$item->image1, 'Image', ['width' => 60, 'height' => 60]);    
+                }
+
+                return '';   
             })
             ->addColumn('image2', function ($item) 
             {
-                
-                return  Html::image('/uploads/product/'.$item->image2, 'Image', ['width' => 60, 'height' => 60]);    
+                if(isset($item->image2) && file_exists(public_path('uploads/product/'.$item->image2)))
+                {
+                    return  Html::image('/uploads/product/'.$item->image2, 'Image', ['width' => 60, 'height' => 60]);    
+                }
+
+                return '';
             })
              ->addColumn('image3', function ($item) 
             {
+                if(isset($item->image3) && file_exists(public_path('uploads/product/'.$item->image3)))
+                {
+                    return  Html::image('/uploads/product/'.$item->image3, 'Image', ['width' => 60, 'height' => 60]);    
+                }
+
+                return '';
                 
-                return  Html::image('/uploads/product/'.$item->image3, 'Image', ['width' => 60, 'height' => 60]);    
             })
             ->addColumn('actions', function ($event) {
                 return $event->admin_action_buttons;
