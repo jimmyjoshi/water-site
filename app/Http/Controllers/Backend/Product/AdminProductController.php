@@ -59,7 +59,10 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-       
+            $general = 'https://news.google.com/news/rss/?gl=US&ned=us';
+            $url    = 'https://news.google.com/news/rss/search/section/q/share market/share market?hl=en&gl=US&ned=us';
+            
+
         return view($this->repository->setAdmin(true)->getModuleView('listView'))->with([
             'repository' => $this->repository
         ]);

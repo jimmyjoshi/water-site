@@ -211,4 +211,36 @@ class APIProductController extends BaseApiController
 
         return $this->ApiSuccessResponse($wishListCount);
     }
+
+    public function getGoogleNews(Request $request)
+    {
+        $url        = 'https://news.google.com/news/rss/?gl=US&ned=us';
+        $keyword    = $request->get('keyword');
+
+        if(isset($keyword) && !empty($keyword))
+        {
+            $url = 'https://news.google.com/news/rss/search/section/q/' .$keyword. '/' .$keyword. '?hl=en&gl=US&ned=us'; 
+        }
+        
+        $news   = simplexml_load_file(urlencode($url));
+        $feeds  = array();
+        $i      = 0;
+
+        foreach ($news->channel->item as $item) 
+        {
+            preg_match('@src="([^"]+)"@', $item->description, $match);
+            $parts = explode('<font size="-1">', $item->description);
+
+            $feeds[$i]['title'] = (string) $item->title;
+            $feeds[$i]['link'] = (string) $item->link;
+            $feeds[$i]['image'] = $match[1];
+            $feeds[$i]['site_title'] = strip_tags($parts[1]);
+            $feeds[$i]['story'] = strip_tags($parts[2]);
+
+            $i++;
+        }
+
+        dd($feeds);
+        
+    }
 }

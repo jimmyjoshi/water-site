@@ -75,6 +75,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ active_class(Active::checkUriPattern('admin/tiers')) }}">
+                        <a href="{{ route('admin.tiers.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Manage Tiers</span>
+                        </a>
+                    </li>
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/access/user/manage-tier')) }}">
                         <a href="{{ route('admin.access.manage-tier') }}">
                             <i class="fa fa-circle-o"></i>

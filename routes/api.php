@@ -52,4 +52,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'jwt.customauth'], function 
     Route::get('products/wishlist-count', 'APIProductController@getWishListCount')->name('api-product.get-wish-list-count');    
     Route::any('orders/create', 'APIOrderController@create')->name('api-order.create');    
 
+    Route::any('news', 'APINewsController@getGoogleNews')->name('api.get-google-news');    
+
 });
