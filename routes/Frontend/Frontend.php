@@ -5,10 +5,15 @@
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('/', 'FrontendController@index')->name('index');
-Route::get('/jewel-categories', 'FrontendController@jewelCategories')->name('jewel-categories');
-Route::get('/jewel-products', 'FrontendController@jewelProducts')->name('jewel-products');
-Route::get('/product-details/{id}', 'FrontendController@productDetails')->name('jewel-products-details');
+Route::get('/categories', 'FrontendController@jewelCategories')->name('water-categories');
+Route::get('products', 'FrontendController@jewelProducts')->name('water-products');
+Route::get('product-details/{id}', 'FrontendController@productDetails')->name('jewel-products-details');
+Route::get('about-us', 'FrontendController@aboutUs')->name('about-us');
+Route::get('services', 'FrontendController@waterServices')->name('water-services');
+Route::get('contact-us', 'FrontendController@contactOwner')->name('water-contact-us');
 Route::get('macros', 'FrontendController@macros')->name('macros');
+
+//Route::any('products', 'FrontendController@timePiece')->name('time-piece');
 
 Route::any('time-piece', 'FrontendController@timePiece')->name('time-piece');
 
@@ -26,7 +31,7 @@ Route::any('legal-terms', 'FrontendController@legalTerms')->name('legal-terms');
 
 Route::any('help', 'FrontendController@helpDesk')->name('help-desk');
 
-Route::any('contact-us', 'FrontendController@contactUs')->name('contact-us');
+//Route::any('contact-us', 'FrontendController@contactUs')->name('contact-us');
 
 /*Route::any('gifts', 'DashboardController@createOrder')->name('create-order');
 

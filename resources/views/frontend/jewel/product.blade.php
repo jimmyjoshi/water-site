@@ -1,9 +1,56 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<body class="inner-bg">
 
-@include('frontend.jewel.menu')
+<div id="page-header">
+    <h1>Yacht Charter</h1>
+    <div class="title-block3"></div>
+    <p><a href="{!! route('frontend.index') !!}">Home</a><i class="fa fa-angle-right"></i>Yacht Charter</p>
+</div>
+
+<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+    
+    <!-- BEGIN .main-content -->
+    <section class="main-content main-content-full">
+        
+        <!-- BEGIN .yacht-listing-wrapper-3 -->
+        <div class="yacht-listing-wrapper-3 clearfix">
+            @foreach($products as $product)
+                
+                <!-- BEGIN .yacht-block -->
+                <div class="yacht-block">
+                    <div class="yacht-block-image">
+                        <div class="new-icon">New</div>
+                        <a href="{{ route('frontend.jewel-products-details', ['id' => $product->id]) }}">
+                            <img width="350" height="250" src="{{ URL::to('/').'/uploads/product/'.$product->image}}" alt="{{ $product->title }}">
+                        </a>
+                    </div>
+                    <div class="yacht-block-content">
+                        <h3>
+                            <a href="{{ route('frontend.jewel-products-details', ['id' => $product->id]) }}">
+                                {{ $product->title }}
+                            </a>
+                        </h3>
+                        <div class="title-block5"></div>
+                        <span>{{ $product->description }}</span>
+                        {{-- <a href="yacht-charter-single.html" class="yacht-charter-book-button">Book Now</a> --}}
+                    </div>
+                <!-- END .yacht-block -->
+                </div>
+            @endforeach
+           
+
+           
+        <!-- END .yacht-listing-wrapper-3 -->
+        </div>
+        
+    <!-- END .main-content -->
+    </section>
+
+<!-- END .content-wrapper -->
+</div>
+{{-- <body class="inner-bg">
 
 <main role="main" id="main-container">
     <div class="container h-100">
@@ -24,40 +71,5 @@
         </div>
     </div>
 </main>
-
-@include('frontend.jewel.footer')
-
-@endsection
-
-@section('footer-js')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>
-
-<script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/slick.min.js')}}"></script>
-
-<script type="text/javascript">
-
-    var slick = jQuery('.stack').slick(
-        {
-            centerPadding: '50px',
-            centerMode: true,
-            infinite: true,
-            arrows: true,
-            draggable: false,
-            touchMove: true,
-            variableWidth: true,
-            dots: false,
-            //swipeToSlide: true,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            focusOnSelect: true,
-            mobileFirst: true
-        });
-
-</script>
-
+ --}}
 @endsection

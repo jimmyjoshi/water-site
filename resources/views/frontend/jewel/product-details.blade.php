@@ -1,143 +1,154 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<body class="inner-bg">
+<div id="page-header">
+    <h1>Yacht Charter Single</h1>
+    <div class="title-block3"></div>
+    <p><a href="{!! route('frontend.index') !!}">Home</a><i class="fa fa-angle-right"></i>{!! $product->title !!}</p>
+</div>
 
-@include('frontend.jewel.menu')
-
-
-<main role="main" id="main-container">
-    <div class="container h-100">
-        <div class="row">
-            <div class="col col-auto">
-                <a href="#" class="btn back-btn btn-back"><i class="fa fa-angle-double-left"></i> Back </a>
-            </div>
-        </div>
-        <div class="row h-100 d-flex align-items-center">
-            <div class="col-lg-5">
-                <figure>
-                    <img src="{{ URL::to('/').'/uploads/product/'.$product->image}}" alt="" height="300" width="300">
-                </figure>
-            </div>
-            <div class="col-lg-1 h-100 d-flex align-items-center pd-sap">
-                <div class="product-detail-box"></div>
-            </div>
-
-            <div class="col-lg-6">
-                <h2>{{ $product->title }}</h2>
-                <div class="details-des">
-                    {{ $product->category->title }}
-                </div>
-
-                <div class="row mt-4 align-items-center">
-                    <div class="col col-auto"><span class="price-label"><i class="fa fa-circle"></i> $ {{ $product->price }}</span></div>
-                    <div class="col col-auto"><span class="code">Product Code: {{ $product->product_code }}</span></div>
-                </div>
-
-                <div class="row mt-4">
-                    @if(isset(access()->user()->id))
-                        @if(count(access()->user()->cart->where('product_id', $product->id)) == 0 )
-                            <div class="col col-auto">
-                                <a href="javascript:void(0);" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
-                                    Add to wishlist
-                                </a>
+<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+    
+    <!-- BEGIN .main-content -->
+    <section class="main-content">
+        
+        <!-- BEGIN .rev_slider_wrapper2 -->
+        <div class="rev_slider_wrapper2">   
+            <!-- BEGIN #slider1 -->
+            <div id="slider2" class="rev_slider" data-version="5.0">
+                <ul>
+                    @if(isset($product->image))
+                        <!-- BEGIN .Slide 1 -->
+                        <li data-transition="fade">
+                            <img src="{{ URL::to('/').'/uploads/product/'.$product->image}}"  alt="{{ $product->title }}"  width="710" height="440">
+                            <div class="tp-caption rev-custom-caption-1"
+                                data-x="center"
+                                data-y="center"
+                                data-whitespace="normal"
+                                data-transform_idle="o:1;"
+                                data-transform_in="o:0"
+                                data-transform_out="o:0"
+                                data-start="500">
                             </div>
-                        @else
-                            <div class="col col-auto">
-                                Already Added to Cart
-                            </div>
-                        @endif
+                        <!-- END .Slide 1 -->
+                        </li>
                     @endif
-                    {{-- <div class="col col-auto"><a href="#" class="btn btn-custom">Add to cart</a> </div> --}}
-                </div>
 
-                <div id="accordion" role="tablist" class="mt-4">
-                    <div class="description">
-                        <div class="desc-title" role="tab" id="headingOne">
-                            <h5 class="mb-0">
-                                <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <span class="fa fa-minus"></span>
-                                    Description
-                                </a>
-                            </h5>
-                        </div>
-
-                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                                 {{ $product->description }}
+                    @if(isset($product->image1))
+                        <!-- BEGIN .Slide 1 -->
+                        <li data-transition="fade">
+                            <img src="{{ URL::to('/').'/uploads/product/'.$product->image1}}"  alt="{{ $product->title }}" width="710" height="440">
+                            <div class="tp-caption rev-custom-caption-2"
+                                data-x="left"
+                                data-y="center"
+                                data-whitespace="normal"
+                                data-transform_idle="o:1;"
+                                data-transform_in="o:0"
+                                data-transform_out="o:0"
+                                data-start="500">
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- END .Slide 1 -->
+                        </li>
+                    @endif
 
+                </ul>
+
+            <!-- END #slider1 -->
             </div>
-            
+
+        <!-- END .rev_slider_wrapper2 -->
         </div>
-    </div>
-</main>
+        
+        <h3>{{ $product->title }}</h3>
+        <div class="title-block7"></div>
+        
+        <p>{{$product->description}}</p>
 
-@include('frontend.jewel.footer')
-@endsection
+        <!-- BEGIN .accordion -->
+        <div class="accordion">
 
-@section('footer-js')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <h4>Pricing Options</h4>
+            <div>{{ $product->description }}</div>
 
-<script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/slick.min.js')}}"></script>
+            <h4>Additional Information</h4>
+            <div>{{ $product->description }}</div>
 
-<script type="text/javascript">
+        <!-- END .accordion -->
+        </div>
+        
+    <!-- END .main-content -->
+    </section>
+    
+    <!-- BEGIN .sidebar-content -->
+    <section class="sidebar-content">
+        
+        <!-- BEGIN .widget -->
+        <div class="widget">
+            
+            <h3>Book This Yacht</h3>
+            <div class="title-block5"></div>
+            
+            <!-- BEGIN .yacht-charter-sale-form -->
+            <div class="yacht-charter-sale-form">
 
-    jQuery(document).on('click', '.add-product-to-cart', function(element)
-    {   
-        var productId = element.target.getAttribute('data-id');
+                <form action="#" method="post">
+                    
+                    <h3>{{ $product->price }}</h3>
+                    
+                    
+                    
+                    <label>Quantity:</label>
+                    <div class="select-wrapper">
+                        <i class="fa fa-angle-down"></i>
+                        <select>
+                            <option selected="selected" value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit">Book Now</button>
 
-        jQuery.ajax(
-        {
-            url: "{!! route('frontend.user.add-product-to-cart') !!}",
-            method: "POST",
-            dataType: 'json',
-            data: {
-                'productId': productId
-            },
-            success: function(data)
-            {
-                if(data.status == true)
-                {
-                    alert("Product Added to Cart Successfully!");
-                    return true;
-                }
+                </form>
 
-                alert("Somethin went Wront !");
-                return false;
-            },
-            error: function(data)
-            {
-                console.log(data);
-            }
-        });
-    });
+            <!-- END .yacht-charter-sale-form -->
+            </div>
+        
+        <!-- END .widget -->
+        </div>
+        
+        <!-- BEGIN .widget -->
+        <div class="widget">
+            
+            <h3>Contact Us</h3>
+            <div class="title-block5"></div>
+            
+            <ul class="contact-details-widget">
+                <li class="cdw-address clearfix">1 Roadtown Street, British Virgin Islands</li>
+                <li class="cdw-time clearfix">Mon - Sat 9.00 - 18.30. Sunday Closed</li>
+                <li class="cdw-phone clearfix">1800-1111-2222</li>
+                <li class="cdw-email clearfix">booking@example.com</li>
+            </ul>
+            
+        <!-- END .widget -->
+        </div>
+        
+    <!-- END .sidebar-content -->
+    </section>
 
-    var slick = jQuery('.stack').slick(
-        {
-            centerPadding: '50px',
-            centerMode: true,
-            infinite: true,
-            arrows: true,
-            draggable: false,
-            touchMove: true,
-            variableWidth: true,
-            dots: false,
-            //swipeToSlide: true,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            focusOnSelect: true,
-            mobileFirst: true
-        });
-
-</script>
-
+<!-- END .content-wrapper -->
+</div>
 @endsection

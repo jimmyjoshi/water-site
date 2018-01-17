@@ -9,20 +9,22 @@
         <title>@yield('title', app_name())</title>
 
         <!-- Meta -->
-        <meta name="description" content="@yield('meta_description', 'Super Gems')">
-        <meta name="author" content="@yield('meta_author', 'WVE Labs')">
-
-        {{ Html::style('css/bootstrap.min.css') }}
-        {{ Html::style('css/font-awesome.min.css') }}
-        {{ Html::style('css/slick-theme.css') }}
-        {{ Html::style('css/sliderstyle.css') }}
-
+        <meta name="description" content="@yield('meta_description', 'Water Slides')">
+        <meta name="author" content="@yield('meta_author', 'Water Slides')">
 
         {{ Html::style('css/style.css') }}
+        {{ Html::style('css/color-blue.css') }}
         {{ Html::style('css/responsive.css') }}
+        {{ Html::style('css/font-awesome.css') }}
 
-        
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+        {{ Html::style('rs-plugin/css/settings.css') }}
+        {{ Html::style('rs-plugin/css/layers.css') }}
+        {{ Html::style('rs-plugin/css/navigation.css') }}
+        {{ Html::style('css/owl.carousel.css') }}
+        {{ Html::style('css/prettyPhoto.css') }}
+
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic|Source+Serif+Pro:400,600,700' rel='stylesheet' type='text/css'>
+
         @yield('meta')
 
         <!-- Styles -->
@@ -43,23 +45,45 @@
         <div id="app">
             @include('includes.partials.logged-in-as')
             
+            @include('includes.partials.messages')
 
-            <div class="container-fluid1">
-                @include('includes.partials.messages')
+            @include('frontend.layouts.top-bar')
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+            @include('frontend.layouts.header')
 
+           
                 @yield('content')
-            </div><!-- container -->
-        </div><!--#app-->
+
+            @include('frontend.layouts.footer')
+            
+            
+        </div><!-- container -->
+    </div><!--#app-->
 
         <!-- Scripts -->
         @yield('before-scripts')
 
 
-        {!! Html::script(mix('js/frontend.js')) !!}
+
+        <!-- JavaScript -->
+        
+        {!! Html::script('js/jquery.min.js') !!}
+        {!! Html::script('js/jquery-ui.min.js') !!}
+        
+        {!! Html::script('rs-plugin/js/jquery.themepunch.tools.min.js?rev=5.0') !!}
+        {!! Html::script('rs-plugin/js/jquery.themepunch.revolution.min.js?rev=5.0') !!}
+        {!! Html::script('js/owl.carousel.min.js') !!}
+        {!! Html::script('js/jquery.prettyPhoto.js') !!}
+
+        {!! Html::script('rs-plugin/js/extensions/revolution.extension.video.min.js') !!}
+        {!! Html::script('rs-plugin/js/extensions/revolution.extension.slideanims.min.js') !!}
+        {!! Html::script('rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') !!}
+        {!! Html::script('rs-plugin/js/extensions/revolution.extension.navigation.min.js') !!}
+        
+        
+        {!! Html::script('js/scripts.js') !!}
+
+        {{-- {!! Html::script(mix('js/frontend.js')) !!} --}}
         @yield('after-scripts')
         <script type="text/javascript" src="{!! asset('js/custom/custom.js') !!}"></script>
       
@@ -68,3 +92,4 @@
         
     </body>
 </html>
+
