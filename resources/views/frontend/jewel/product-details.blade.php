@@ -86,22 +86,22 @@
         <!-- BEGIN .widget -->
         <div class="widget">
             
-            <h3>Book This Yacht</h3>
+            <h3>Buy {{ $product->title }}</h3>
             <div class="title-block5"></div>
             
             <!-- BEGIN .yacht-charter-sale-form -->
             <div class="yacht-charter-sale-form">
 
-                <form action="#" method="post">
+                <form action="{!! route('frontend.water-buy-single-product') !!}" method="GET">
                     
-                    <h3>{{ $product->price }}</h3>
+                    <h3>Rs {{ $product->price }}</h3>
                     
                     
                     
                     <label>Quantity:</label>
                     <div class="select-wrapper">
                         <i class="fa fa-angle-down"></i>
-                        <select>
+                        <select name="product_qty">
                             <option selected="selected" value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -119,8 +119,34 @@
                             <option value="15">15</option>
                         </select>
                     </div>
+
+                    <label>Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="name" required="required">
+                    </div>
                     
-                    <button type="submit">Book Now</button>
+                    <label>Contact Number</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="contact_number"  required="required">
+                    </div>
+
+                    <label>Email Id</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="email_id"  required="required">
+                    </div>
+
+                    @if(count(access()->user()->cart->where('product_id', $product->id)) == 0 )
+                         <button type="button" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
+                        
+                            Add to wishlist
+                        </button>
+                    @endif
+
+                    <div class="col col-auto">
+                        <input type="hidden" name="product_id" value="{!!  $product->id !!}">
+                        <button type="submit">Buy Now</button>
+                    </div>
+                
 
                 </form>
 
@@ -151,4 +177,43 @@
 
 <!-- END .content-wrapper -->
 </div>
+@endsection
+
+@section('footer-js')
+
+<script type="text/javascript">
+
+    jQuery(document).on('click', '.add-product-to-cart', function(element)
+    {   
+        var productId = element.target.getAttribute('data-id');
+
+        jQuery.ajax(
+        {
+            url: "{!! route('frontend.water-add-to-cart') !!}",
+
+            method: "GET",
+            dataType: 'json',
+            data: {
+                'productId': productId
+            },
+            success: function(data)
+            {
+                if(data.status == true)
+                {
+                    alert("Product Added to Cart Successfully!");
+                    return true;
+                }
+
+                alert("Somethin went Wront !");
+                return false;
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+    });
+
+</script>
+
 @endsection

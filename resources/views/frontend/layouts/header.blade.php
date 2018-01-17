@@ -5,10 +5,10 @@
 	<div class="header-inner">
 
 		<div class="logo">
-			<h2><a href="index.html">Yacht Charter</a></h2>
+			<h2><a href="{!! route('frontend.index') !!}">Water Slide</a></h2>
 		</div>
 
-		<a href="online-booking.html" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Online Booking</a>
+		<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Checkout</a>
 
 		<!-- BEGIN #primary-navigation -->
 		<nav id="primary-navigation" class="navigation-wrapper fixed-navigation clearfix">
@@ -38,7 +38,7 @@
 				<!-- END .navigation -->
 				</div>
 
-				<a href="online-booking.html" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Online Booking</a>
+				<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Check Out</a>
 
 			<!-- END .navigation-inner -->
 			</div>

@@ -33,7 +33,10 @@ class Order extends BaseModel
         'total_amount',
         'due',
         'total_qty',
-        'total_cost',
+        'total_costc',
+        'username',
+        'contact_number',
+        'email_id',
         'description'
     ];
 
