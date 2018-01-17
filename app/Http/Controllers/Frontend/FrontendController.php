@@ -230,7 +230,10 @@ class FrontendController extends Controller
             'due'           => $product->price * $qty,
             'total_qty'     => $qty,
             'total_costc'   => $product->price * $qty,
-            'description'   => 'Direct Order place by viewing item'
+            'username'      => $request->get('name'),
+            'email_id'      => $request->get('email_id'),
+            'description'   => 'Direct Order place by viewing item',
+            'contact_number'  => $request->get('contact_number')
 
         ]);
         
