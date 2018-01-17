@@ -44,22 +44,6 @@ Route::any('legal-terms', 'FrontendController@legalTerms')->name('legal-terms');
 
 Route::any('help', 'FrontendController@helpDesk')->name('help-desk');
 
-//Route::any('contact-us', 'FrontendController@contactUs')->name('contact-us');
-
-/*Route::any('gifts', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('client-service', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('corporate', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('catelogs', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('legal-terms', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('help', 'DashboardController@createOrder')->name('create-order');
-
-Route::any('contact-us', 'DashboardController@createOrder')->name('create-order');*/
-
 /*
  * These frontend controllers require the user to be logged in
  * All route names are prefixed with 'frontend.'

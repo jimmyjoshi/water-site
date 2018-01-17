@@ -73,6 +73,11 @@ class DashboardController extends Controller
         	$repository = new EloquentOrderRepository;
             $orderInfo 	= $repository->cartToOrder($userInfo, $userInfo->cart);
 
+            $orderInfo->username        = $request->get('name');
+            $orderInfo->contact_number  = $request->get('mobile');
+            $orderInfo->email_id        = $request->get('emailId');
+            $orderInfo->save();
+            
             if(isset($orderInfo) && $orderInfo)
             {
                 return response()->json((object) [
