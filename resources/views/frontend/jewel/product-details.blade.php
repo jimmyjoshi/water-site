@@ -137,14 +137,13 @@
 
                     @if(count(access()->user()->cart->where('product_id', $product->id)) == 0 )
                          <button type="button" class="btn btn-custom add-product-to-cart" data-id="{{ $product->id }}">
-                        
-                            Add to wishlist
+                            Add to Cart
                         </button>
                     @endif
 
                     <div class="col col-auto">
                         <input type="hidden" name="product_id" value="{!!  $product->id !!}">
-                        <button type="submit">Buy Now</button>
+                        <button type="submit">Create Inquiry</button>
                     </div>
                 
 

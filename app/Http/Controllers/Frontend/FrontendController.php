@@ -153,7 +153,7 @@ class FrontendController extends Controller
 
     public function corporate()
     {
-        return view('frontend.jewel.front-end-pages.corporate');   
+        return view('frontend.jewel.front-end-pages.corporate');
     }
 
     public function catelogs()
@@ -295,4 +295,48 @@ class FrontendController extends Controller
             ], 200);
     }
 
+    public function productCategoryDetails($id, Request $request)
+    {
+        $products = $this->productRepository->getProductsByCategoryId($id);
+        $category = $this->categoryRepository->getById($id);
+        return view('frontend.jewel.category-product')->with([
+            'category' => $category,
+            'products' => $products
+        ]);
+    }
+
+    public function manufacturing(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.manufacturing');
+    }
+
+    public function theming(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.theming');
+    }
+
+    public function engineering(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.engineering');
+    }
+
+    public function serviceQuality(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.service-quality');
+    }
+
+    public function installations(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.installations');
+    }
+
+    public function serviceTesting(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.service-testing');
+    }
+
+    public function parkConsulting(Request $request)
+    {
+        return view('frontend.jewel.front-end-pages.park-consulting');
+    }
 }

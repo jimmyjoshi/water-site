@@ -458,4 +458,20 @@ class EloquentProductRepository extends DbRepository
     	return count($productData);
 
     }
+
+    /**
+     * Get Products By CategoryId
+     * 
+     * @param int $categoryId
+     * @return object
+     */
+    public function getProductsByCategoryId($categoryId = null)
+    {
+    	if($categoryId)
+    	{
+    		return $this->model->where('category_id', $categoryId)->get();
+    	}
+
+    	return false;
+    }
 }

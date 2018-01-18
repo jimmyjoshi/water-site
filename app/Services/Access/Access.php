@@ -3,6 +3,7 @@
 namespace App\Services\Access;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\Category\Category;
 
 /**
  * Class Access.
@@ -62,6 +63,11 @@ class Access
     public function loginUsingId($id)
     {
         return auth()->loginUsingId($id);
+    }
+
+    public function getProductCategories()
+    {
+        return Category::with('products')->get();
     }
 
     /**

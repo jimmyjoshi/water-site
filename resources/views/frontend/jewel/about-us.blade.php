@@ -19,11 +19,30 @@
                     <!-- BEGIN .qns-one-half -->
                     <div class="qns-one-half">
                         
-                        <h4>Our Company</h4>
+                        <h4>About</h4>
                         <div class="title-block5"></div>
-                        <p>Duis commodo ipsum quis ante venenatis rhoncus. Vivamus imperdiet felis ac facilisis hendrerit. Nulla eu elementum ex, ut pulvinar est. Nam aliquet et tortor sed aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer sit amet aliquet leo. Sed aliquam ex id turpis mattis, sit amet porta augue laoreet. Duis euismod feugiat consectetur.</p>
 
-                        <p>Maecenas sodales maximus mi sed placerat. Cras nec velit blandit, porta risus a, accumsan tellus. In hac habitasse platea dictumst. Curabitur mollis nisl sit amet pellentesque congue. Sed feugiat elit et nunc tempor eleifend. Sed ac porttitor ligula, nec efficitur justo. Nam sit amet sagittis diam, id maximus nibh. Proin consequat, nibh ut semper rhoncus, lacus tortor laoreet ante.</p>
+                        <p>
+                            APAC Integrated  began as a waterpark operator in 2012 and has maintained a focus on the guest experience and achieving operational success with everything we do.
+                            Serving our clients and being their partner in success is our top priority. We’ve established an organization with the depth and breadth to be just that. From master planning to installation, we’ve created a team of dedicated experts to ensure our name is synonymous with excellence.
+                        </p>
+
+
+                        <h5><strong>With You</strong></h5>
+                        <p>
+                            Our people are the driving force behind what makes APAC Integrated the market leader. Decades of combined experience as park operators, designers, suppliers, and guests has primed us to effectively deliver our clients’ visions into vibrant realities.
+                            Your business objectives are at the core of our creative process as we work with you to develop a profitable solution to help you serve your customers as best you can.
+                        </p>
+
+                        <h5><strong>Our Culture</strong></h5>
+                        <p>
+                            We’ve built an inspiring team at APAC Integrated so we are able to attract and hire the best of our industry. Our team of over 150 enthusiastic professionals show up every day with a passion for their work, making what APAC Integrated does possible
+                        </p>
+
+                        <h5><strong>Safety Standards</strong></h5>
+                        <p>
+                            Safety is non-negotiable at APAC Integrated. Each design is evaluated using carefully calibrated simulations followed by meticulous testing and fine-tuning to get the ride experience optimal and safety-assured.
+                        </p>
                     
                     <div class="space4"></div>
                     
@@ -33,68 +52,35 @@
                     <!-- BEGIN .qns-one-half -->
                     <div class="qns-one-half qns-last">
                         
-                        <!-- BEGIN .photo-gallery-wrapper -->
-                        <div class="photo-gallery-wrapper photo-gallery-2-col clearfix">
-
-                            <div class="photo-gallery-item"><a href="images/image11.jpg" data-gal="prettyPhoto[gallery]"><img src="images/image11.jpg" alt="" /></a></div>
-                            <div class="photo-gallery-item"><a href="images/image11.jpg" data-gal="prettyPhoto[gallery]"><img src="images/image11.jpg" alt="" /></a></div>
-                            <div class="photo-gallery-item"><a href="images/image11.jpg" data-gal="prettyPhoto[gallery]"><img src="images/image11.jpg" alt="" /></a></div>
-                            <div class="photo-gallery-item"><a href="images/image11.jpg" data-gal="prettyPhoto[gallery]"><img src="images/image11.jpg" alt="" /></a></div>
-
-                        <!-- END .photo-gallery-wrapper -->
-                        </div>
-                        
-                        <div class="space4"></div>
-                        
-                    <!-- END .qns-one-half -->
-                    </div>
-                
-                <!-- END .clearfix -->  
-                </div>
-                
-                <!-- BEGIN .clearfix -->
-                <div class="clearfix">
-                    
-                    <!-- BEGIN .qns-one-half -->
-                    <div class="qns-one-half">
-                        
-                        <h4>Video Tour</h4>
-                        <div class="title-block5"></div>
-                        
-                        <div class="video-wrapper video-wrapper-page">
-                            <div class="video-play">
-                                <a href="https://www.youtube.com/watch?v=4uObRcSDyLc" data-gal="prettyPhoto"><i class="fa fa-play"></i></a>
-                            </div>
-                        </div>
-                        
-                    <!-- END .qns-one-half -->  
-                    </div>
-                    
-                    <!-- BEGIN .qns-one-half -->
-                    <div class="qns-one-half qns-last">
-                        
-                        <h4>About Our Yachts</h4>
+                        <h4>Our Team</h4>
                         <div class="title-block5"></div>
                         
                         <div id="tabs" class="tabs-no-margin">
 
                             <ul class="nav clearfix">
-                                <li><a href="#tabs-tab-title-1">Luxury</a></li>
-                                <li><a href="#tabs-tab-title-2">Technology</a></li>
-                                <li><a href="#tabs-tab-title-3">Safety</a></li>
+                                <li><a href="#tabs-tab-title-1">PRANAY SAFARI</a></li>
+                                <li><a href="#tabs-tab-title-2">KUNAL GAUTAM</a></li>
                             </ul>
 
-                            <div id="tabs-tab-title-1"><p>Lorem ips dolor amet consec adipisci pellentesque mollis hend accumsan in euismod tortor posuere nisi donec malesuada feugiat dapibus. Nunc congue praesent ac fringilla neque aliquam euismod sem est pellentes lorem dignissim in duis in convallis nulla elit sit at. Pellentesque pellentesque risus vitae tortor laoreet tincidunt.</p>
+                            <div id="tabs-tab-title-1">
+                                <center>
+                                    <h1>PRANAY SAFARI</h1>
+                                    <p>
+                                        <img src="{!! URL::to('/').'/uploads/team/pranay.jpg' !!}">
+                                    </p>
+                                    <h1>FOUNDER</h1>
+                                </center>
+                            </div>
 
-                            <p>Placerat velit, ultricies pharetra ante. Fusce aliquam velit sed magna Consectetur, at scelerisque elit lobortis. Sed lacus est, dictum eget auctor sit amet, gravida in ipsum. Mauris eget nibh lorem. In imperdiet nec ligula vel vulputate. Nam convallis, urna id lobortis facilisis.</p></div>
-
-                            <div id="tabs-tab-title-2"><p>In hac habitasse platea dictumst. Morbi eleifend ante mauris, nec tempus magna posuere id. Suspendisse leo risus, vestibulum sed urna nec, iaculis laoreet ex. In convallis eros quam, eu luctus mauris aliquam eu. Nulla id mollis elit. Pellentesque ut libero consectetur arcu lacinia dictum. Pellentesque tristique purus tortor, at rhoncus nisl molestie ut.</p>
-
-                            <p>Pellentesque pellentesque risus vitae tortor laoreet tincidunt. Donec nec aliquam massa. Pellentesque vulputate id est non condimentum. Duis sed dictum mauris, id lacinia velit. Quisque id tincidunt massa, id commodo augue. Curabitur cursus quam at nunc luctus convallis.</p></div>
-
-                            <div id="tabs-tab-title-3"><p>Ut tempus ultricies velit, vitae luctus purus bibendum in. Proin pharetra sodales mauris at fringilla. Vestibulum fringilla tellus vel euismod auctor. Donec tincidunt mollis vulputate. Sed dignissim egestas lectus, et hendrerit sapien. Aenean sodales magna sapien, in feugiat eros viverra at. Sed vel metus at velit porta finibus nec ac arcu.</p>
-
-                            <p>Aliquam pretium elit quis erat tempor consectetur. Aenean id tellus ultrices, dignissim tortor ac, consectetur augue. Morbi ullamcorper tristique nisi, eget ultrices leo tristique hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus donec pellentesque.</p></div>
+                            <div id="tabs-tab-title-2">
+                                <center>
+                                    <h1>KUNAL GAUTAM</h1>
+                                    <p>
+                                       <img src="{!! URL::to('/').'/uploads/team/kunal.jpg' !!}">
+                                    </p>
+                                    <h1>HEAD-SALES & MARKETING</h1>
+                                </center>
+                            </div>
 
                         </div>
                         
@@ -103,7 +89,6 @@
                 
                 <!-- END .clearfix -->  
                 </div>
-                
             <!-- END .main-content -->
             </section>
             

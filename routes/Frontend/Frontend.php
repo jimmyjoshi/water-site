@@ -16,6 +16,8 @@ Route::get('services', 'FrontendController@waterServices')->name('water-services
 Route::get('contact-us', 'FrontendController@contactOwner')->name('water-contact-us');
 Route::get('macros', 'FrontendController@macros')->name('macros');
 
+Route::get('product-category-details/{id}', 'FrontendController@productCategoryDetails')->name('water-product-category');
+
 Route::any('buy-single-product', 'FrontendController@buySingleProduct')->name('water-buy-single-product');
 
 Route::any('remove-product-from-cart', 'FrontendController@removeProductToCart')->name('remove-product-from-cart');
@@ -43,6 +45,17 @@ Route::any('catelogs', 'FrontendController@catelogs')->name('catelogs');
 Route::any('legal-terms', 'FrontendController@legalTerms')->name('legal-terms');
 
 Route::any('help', 'FrontendController@helpDesk')->name('help-desk');
+
+
+
+Route::any('manufacturing', 'FrontendController@manufacturing')->name('jewel-service-manufacture');
+Route::any('theming', 'FrontendController@theming')->name('jewel-service-theming');
+Route::any('engineering', 'FrontendController@engineering')->name('jewel-service-engineering');
+Route::any('service-quality', 'FrontendController@serviceQuality')->name('jewel-service-quality');
+Route::any('service-installations', 'FrontendController@installations')->name('jewel-service-installations');
+Route::any('service-testing', 'FrontendController@serviceTesting')->name('jewel-service-testing');
+Route::any('service-park-consulating', 'FrontendController@parkConsulting')->name('jewel-service-park-consulating');
+
 
 /*
  * These frontend controllers require the user to be logged in
