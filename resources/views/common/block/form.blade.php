@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sjaltj8p8fo2ondfz7ksyg7q81c7l0uvddovcxm8zgcspfld"></script> 
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=fjqpuyv27mtkdzk79vw836b584gklfjg6chiizcvn5ctxz7o"></script> 
 
 <script>
 
