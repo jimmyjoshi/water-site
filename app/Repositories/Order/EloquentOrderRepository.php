@@ -262,7 +262,8 @@ class EloquentOrderRepository extends DbRepository
 			$this->model->getTable().'.title',
 			$this->model->getTable().'.total_amount',
 			$this->model->getTable().'.total_qty',
-			$this->model->getTable().'.description'
+			$this->model->getTable().'.description',
+			$this->model->getTable().'.username'
 		];
     }
 
