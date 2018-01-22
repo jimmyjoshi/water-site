@@ -19,11 +19,19 @@
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <h3 class="profile-username text-center">
-                        {{$item->user->name}}
+                        {{$item->username}}
                     </h3>
 
                     <p class="text-muted text-center">
-                        {{$item->user->email}}
+                        {{$item->email_id}}
+                    </p>
+
+                    <p class="text-muted text-center">
+                        {{$item->contact_number}}
+                    </p>
+
+                     <p class="text-muted text-center">
+                        Created At :  {{ date('d-m-Y H:i A', strtotime($item->created_at))}}
                     </p>
 
                      <p class="text-muted text-center">

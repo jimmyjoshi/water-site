@@ -46,6 +46,13 @@
                 </a>
             </li>
 
+             <li class="{{ active_class(Active::checkUriPattern('admin/block')) }}">
+                <a href="{{ route('admin.block.index') }}">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span>Content Management</span>
+                </a>
+            </li>
+
             <li class="{{ active_class(Active::checkUriPattern('admin/product')) }}">
                 <a href="{{ route('admin.product.index') }}">
                     <i class="fa fa-product-hunt" aria-hidden="true"></i>
