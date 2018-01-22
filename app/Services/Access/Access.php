@@ -4,6 +4,8 @@ namespace App\Services\Access;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use App\Models\Category\Category;
+use App\Models\Product\Product;
+use App\Models\Block\Block;
 
 /**
  * Class Access.
@@ -155,5 +157,20 @@ class Access
     public function hasPermissions($permissions, $needsAll = false)
     {
         return $this->allowMultiple($permissions, $needsAll);
+    }
+
+    public function getBlock($key = null)
+    {
+        if($key)
+        {
+            return Block::where('block_key', $key)->pluck('block')->first();
+        }
+
+        return '';
+    }
+
+    public function getLatestProducts()
+    {
+        return Product::all();
     }
 }
