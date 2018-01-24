@@ -58,16 +58,16 @@
 
 				<div class="footer-bottom-inner clearfix">
 
-					<p class="footer-message">&copy; 2016 Yacht Charter. All Rights Reserved</p>
+					<p class="footer-message" style="text-align: center;">&copy;  All Rights Reserved</p>
 
-					<div class="footer-social-icons-wrapper">
+					{{-- <div class="footer-social-icons-wrapper">
 						<a href="#"><i class="fa fa-facebook"></i></a>
 						<a href="#"><i class="fa fa-twitter"></i></a>
 						<a href="#"><i class="fa fa-instagram"></i></a>
 						<a href="#"><i class="fa fa-youtube-play"></i></a>
 						<a href="#"><i class="fa fa-pinterest"></i></a>
 						<a href="#"><i class="fa fa-tumblr"></i></a>
-					</div>
+					</div> --}}
 
 				</div>
 

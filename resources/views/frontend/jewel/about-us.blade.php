@@ -35,35 +35,33 @@
                         <h4>Our Team</h4>
                         <div class="title-block5"></div>
                         
-                        <div id="tabs" class="tabs-no-margin">
-
-                            <ul class="nav clearfix">
-                                <li><a href="#tabs-tab-title-1">PRANAY SAFARI</a></li>
-                                <li><a href="#tabs-tab-title-2">KUNAL GAUTAM</a></li>
-                            </ul>
-
-                            <div id="tabs-tab-title-1">
+                        <div>
+                            <div class="qns-one-half">
                                 <center>
                                     <h1>PRANAY SAFARI</h1>
                                     <p>
-                                        <img src="{!! URL::to('/').'/uploads/team/pranay.jpg' !!}">
+                                        <img src="{!! URL::to('/').'/uploads/team/pranay.jpg' !!}"  width="400" height="450">
                                     </p>
                                     <h1>FOUNDER</h1>
                                 </center>
+                                <p>
+                                    This is Lorem Ipsum This is Lorem Ipsum This is Lorem Ipsum This is Lorem Ipsum 
+                                </p>
                             </div>
-
-                            <div id="tabs-tab-title-2">
+                            <div class="qns-one-half qns-last">
                                 <center>
                                     <h1>KUNAL GAUTAM</h1>
                                     <p>
-                                       <img src="{!! URL::to('/').'/uploads/team/kunal.jpg' !!}">
+                                       <img src="{!! URL::to('/').'/uploads/team/kunal.jpeg' !!}" width="400" height="450">
                                     </p>
                                     <h1>HEAD-SALES & MARKETING</h1>
                                 </center>
-                            </div>
-
+                                <p>
+                                    This is Lorem Ipsum This is Lorem Ipsum This is Lorem Ipsum This is Lorem Ipsum 
+                                </p>
+                            </div>                            
                         </div>
-                        
+
                     <!-- END .qns-one-half -->
                     </div>
                 
