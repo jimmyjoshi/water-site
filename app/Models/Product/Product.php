@@ -35,6 +35,9 @@ class Product extends BaseModel
         'image1',
         'image2',
         'image3',
+        'hd_image',
+        'additional_details',
+        'video_url'
     ];
 
     /**

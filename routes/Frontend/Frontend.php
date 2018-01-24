@@ -52,6 +52,9 @@ Route::any('manufacturing', 'FrontendController@manufacturing')->name('jewel-ser
 Route::any('theming', 'FrontendController@theming')->name('jewel-service-theming');
 Route::any('engineering', 'FrontendController@engineering')->name('jewel-service-engineering');
 Route::any('service-quality', 'FrontendController@serviceQuality')->name('jewel-service-quality');
+
+Route::any('services/{block}', 'FrontendController@servicesContainer')->name('service-container');
+
 Route::any('service-installations', 'FrontendController@installations')->name('jewel-service-installations');
 Route::any('service-testing', 'FrontendController@serviceTesting')->name('jewel-service-testing');
 Route::any('service-park-consulating', 'FrontendController@parkConsulting')->name('jewel-service-park-consulating');

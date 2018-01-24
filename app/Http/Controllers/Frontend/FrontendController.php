@@ -13,6 +13,7 @@ use Tymon\JWTAuthExceptions\JWTException;
 use Auth;
 use App\Models\Order\Order;
 use App\Models\OrderItem\OrderItem;
+use App\Models\Block\Block;
 
 /**
  * Class FrontendController.
@@ -338,5 +339,12 @@ class FrontendController extends Controller
     public function parkConsulting(Request $request)
     {
         return view('frontend.jewel.front-end-pages.park-consulting');
+    }
+
+    public function servicesContainer($blockKey, Request $request)
+    {
+        $block = Block::where('block_key', $blockKey)->first();
+            
+        return view('frontend.jewel.front-end-pages.block-container')->with('block', $block);
     }
 }

@@ -53,38 +53,39 @@
 							<a href="{!! route('frontend.water-services') !!}">Services</a>
 							<ul>
 								<li>
-								 	<a href="{{ route('frontend.jewel-service-manufacture') }}">
-	                                	Manufacturing
+								 	<a href="{{ route('frontend.service-container', ['key' => 'quality']) }}">
+	                                	Quality
 	                            	</a>
 								</li>
 								<li>
-								 	<a href="{{ route('frontend.jewel-service-theming') }}">
-	                                	Theming
+								 	<a href="{{ route('frontend.service-container', ['key' => 'lrtm']) }}">
+	                                	LRTM
 	                            	</a>
 								</li>
 								<li>
-								 	<a href="{{ route('frontend.jewel-service-engineering') }}">
+								 	<a href="{{ route('frontend.service-container', ['key' => 'design-capabilities']) }}">
+	                                	Design Capabilities
+	                                </a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'marketing-layout']) }}">
+	                                	Marketing Layout
+	                                </a>
+								</li>
+								
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'thematization']) }}">
+	                                	Thematization
+	                            	</a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'engineering']) }}">
 	                                	Engineering
 	                            	</a>
 								</li>
 								<li>
-								 	<a href="{{ route('frontend.jewel-service-quality') }}">
-	                                	Quality Management
-	                            	</a>
-								</li>
-								<li>
-								 	<a href="{{ route('frontend.jewel-service-installations') }}">
+								 	<a href="{{ route('frontend.service-container', ['key' => 'installations']) }}">
 	                                	Installations
-	                            	</a>
-								</li>
-								<li>
-								 	<a href="{{ route('frontend.jewel-service-testing') }}">
-	                                	Testing & Commissioning
-	                            	</a>
-								</li>
-								<li>
-								 	<a href="{{ route('frontend.jewel-service-park-consulating') }}">
-	                                	Park Rejuvenation And Consultation
 	                            	</a>
 								</li>
 							</ul>
@@ -118,19 +119,81 @@
 			<ul>	
 				<li class="current-menu-item">
 							<a href="{!! route('frontend.index') !!}">Home</a>
-				</li>
-				<li class="current-menu-item">
-					<a href="{!! route('frontend.about-us') !!}">About Us</a>
-				</li>
-				<li class="current-menu-item">
-					<a href="{!! route('frontend.water-services') !!}">Services</a>
-				</li>
-				<li class="current-menu-item current_page_item">
-					<a href="{!! route('frontend.water-products') !!}">Products</a>
-				</li>
-				<li class="current-menu-item">
-					<a href="{!! route('frontend.water-contact-us') !!}">Contact Us</a>
-				</li>
+						</li>
+						<li><a href="{!! route('frontend.water-products') !!}">Products</a>
+							@if(count(access()->getProductCategories()))
+							<ul>
+								@foreach(access()->getProductCategories() as $category)
+									<li>
+										<a href="{!! route('frontend.water-product-category', ['id' => $category->id]) !!}">
+											{{$category->title}}
+										</a>
+										@if(count($category->products))
+											<ul>
+												@foreach($category->products as $product)
+													<li>
+													 	<a href="{{ route('frontend.jewel-products-details', ['id' => $product->id]) }}">
+						                                	{{ $product->title }}
+						                            	</a>
+													</li>
+												@endforeach
+											</ul>
+										@endif
+									</li>
+								@endforeach
+							</ul>
+							@endif
+						</li>
+						<li class="current-menu-item">
+							<a href="{!! route('frontend.about-us') !!}">About Us</a>
+						</li>
+						<li class="current-menu-item">
+							<a href="{!! route('frontend.water-services') !!}">Services</a>
+							<ul>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'quality']) }}">
+	                                	Quality
+	                            	</a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'lrtm']) }}">
+	                                	LRTM
+	                            	</a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'design-capabilities']) }}">
+	                                	Design Capabilities
+	                                </a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'marketing-layout']) }}">
+	                                	Marketing Layout
+	                                </a>
+								</li>
+								
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'thematization']) }}">
+	                                	Thematization
+	                            	</a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'engineering']) }}">
+	                                	Engineering
+	                            	</a>
+								</li>
+								<li>
+								 	<a href="{{ route('frontend.service-container', ['key' => 'installations']) }}">
+	                                	Installations
+	                            	</a>
+								</li>
+							</ul>
+						</li>
+						{{-- <li class="current-menu-item current_page_item">
+							<a href="{!! route('frontend.water-products') !!}">Products</a>
+						</li> --}}
+						<li class="current-menu-item">
+							<a href="{!! route('frontend.water-contact-us') !!}">Contact Us</a>
+						</li>
 			</ul>
 
 		<!-- END .mobile-navigation-wrapper -->

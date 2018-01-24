@@ -16,9 +16,7 @@
                 <!-- BEGIN .clearfix -->
                 <div class="clearfix">
                     
-                    <!-- BEGIN .qns-one-half -->
-                    <div class="qns-one-half">
-                        
+                   
                         <h4>About</h4>
                         <div class="title-block5"></div>
 
@@ -26,12 +24,13 @@
 
                     
                     <div class="space4"></div>
+                </div>
                     
                     <!-- END .qns-one-half -->
-                    </div>
+                   
                     
                     <!-- BEGIN .qns-one-half -->
-                    <div class="qns-one-half qns-last">
+                    <div class="main-content-full">
                         
                         <h4>Our Team</h4>
                         <div class="title-block5"></div>

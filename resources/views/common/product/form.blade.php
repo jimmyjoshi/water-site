@@ -53,6 +53,23 @@
     </div>
 </div>
 
+<div class="box-body">
+    <div class="form-group">
+        {{ Form::label('additional_details', 'Additional Details :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::textarea('additional_details', null, ['rows' => 4, 'cols' => 40, 'class' => 'form-control']) }}
+        </div>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="form-group">
+        {{ Form::label('video_url', 'Video URL :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::text('video_url', null, ['class' => 'form-control', 'placeholder' => 'Video URL']) }}
+        </div>
+    </div>
+</div>
 
 <div class="box-body">
     <div class="form-group">
@@ -114,6 +131,23 @@
     <center>
         @if(isset($item->image3))
             {{ Html::image('/uploads/product/'.$item->image3, 'Image', ['width' => 250, 'height' => 250]) }}
+        @endif
+    </center>
+</div>
+
+
+<div class="box-body">
+    <div class="form-group">
+        {{ Form::label('hd_image', 'Select 3D Image :', ['class' => 'col-lg-2 control-label']) }}
+
+        <div class="col-lg-10">
+            {{ Form::file('hd_image', null, ['class' => 'form-control']) }}
+        </div>
+
+    </div>
+    <center>
+        @if(isset($item->hd_image))
+            {{ Html::image('/uploads/product/'.$item->hd_image, 'Image', ['width' => 250, 'height' => 250]) }}
         @endif
     </center>
 </div>

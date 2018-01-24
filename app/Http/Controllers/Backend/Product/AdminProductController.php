@@ -148,6 +148,13 @@ class AdminProductController extends Controller
             $input = array_merge($input, ['image3' => $imageName3]);
         }
 
+        if($request->file('hd_image'))
+        {
+            $imageName4  = rand(11111, 99999) . '_product.' . $request->file('hd_image')->getClientOriginalExtension();
+            $request->file('hd_image')->move(base_path() . '/public/uploads/product/', $imageName4);
+            $input = array_merge($input, ['hd_image' => $imageName4]);
+        }
+
 
         $this->repository->create($input);
 
@@ -206,6 +213,14 @@ class AdminProductController extends Controller
             $request->file('image3')->move(base_path() . '/public/uploads/product/', $imageName);
             $input = array_merge($input, ['image3' => $imageName]);
         }
+
+        if($request->file('hd_image'))
+        {
+            $imageName4  = rand(11111, 99999) . '_product.' . $request->file('hd_image')->getClientOriginalExtension();
+            $request->file('hd_image')->move(base_path() . '/public/uploads/product/', $imageName4);
+            $input = array_merge($input, ['hd_image' => $imageName4]);
+        }
+
 
         $status = $this->repository->update($id, $input);
         

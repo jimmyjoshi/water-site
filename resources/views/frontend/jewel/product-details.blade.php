@@ -72,7 +72,13 @@
             <div>{{ $product->description }}</div>
 
             <h4>Additional Information</h4>
-            <div>{{ $product->description }}</div>
+            <div>{{ $product->additional_details }}</div>
+
+            <h4>3d Image</h4>
+            <div><img src="{{ URL::to('/').'/uploads/product/'.$product->hd_image}}"  alt="{{ $product->title }}" width="710" height="440"></div>
+
+            <h4>Product Video</h4>
+            <div>{{ $product->video_url }}</div>
 
         <!-- END .accordion -->
         </div>
@@ -162,9 +168,11 @@
             <div class="title-block5"></div>
             
             <ul class="contact-details-widget">
-                <li class="cdw-address clearfix">1 Roadtown Street, British Virgin Islands</li>
+                <li class="cdw-address clearfix">
+                    11-B VATSA HOUSE, JANMA BHOOMI MARG, MUMBAI 400001, INDIA
+                </li>
                 <li class="cdw-time clearfix">Mon - Sat 9.00 - 18.30. Sunday Closed</li>
-                <li class="cdw-phone clearfix">1800-1111-2222</li>
+                <li class="cdw-phone clearfix">+91 9923 599 203</li>
                 <li class="cdw-email clearfix">booking@example.com</li>
             </ul>
             
