@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="page-header">
-    <h1>Yacht Charter Single</h1>
+    <h1>{!! $product->category->title !!}</h1>
     <div class="title-block3"></div>
     <p><a href="{!! route('frontend.index') !!}">Home</a><i class="fa fa-angle-right"></i>{!! $product->title !!}</p>
 </div>
@@ -60,28 +60,32 @@
         <!-- END .rev_slider_wrapper2 -->
         </div>
         
-        <h3>{{ $product->title }}</h3>
-        <div class="title-block7"></div>
-        
-        <p>{{$product->description}}</p>
+        <div id="tabs" class="tabs-no-margin">
+            <ul class="nav clearfix">
+                <li><a href="#tabs-tab-title-1">Details</a></li>
+                <li><a href="#tabs-tab-title-2">3D Image</a></li>
+                <li><a href="#tabs-tab-title-3">Video</a></li>
+            </ul>
 
-        <!-- BEGIN .accordion -->
-        <div class="accordion">
+                <div id="tabs-tab-title-1">
+                    <p> Title : {{ $product->title }}</p>
+                    <p>Description : {{$product->description}}</p>
+                    <p>Additional Information : {{ $product->additional_details }}</p>
+                </div>
 
-            <h4>Pricing Options</h4>
-            <div>{{ $product->description }}</div>
-
-            <h4>Additional Information</h4>
-            <div>{{ $product->additional_details }}</div>
-
-            <h4>3d Image</h4>
-            <div><img src="{{ URL::to('/').'/uploads/product/'.$product->hd_image}}"  alt="{{ $product->title }}" width="710" height="440"></div>
-
-            <h4>Product Video</h4>
-            <div>{{ $product->video_url }}</div>
-
-        <!-- END .accordion -->
-        </div>
+                <div id="tabs-tab-title-2">
+                    <p>
+                        @if(isset($product->hd_image))
+                            <img src="{{ URL::to('/').'/uploads/product/'.$product->hd_image}}"  alt="{{ $product->title }}" width="710" height="440">
+                        @endif
+                    </p>
+                </div>
+                <div id="tabs-tab-title-3">
+                    <p>
+                        {{ $product->video_url }}
+                    </p>
+                </div>
+            </div>
         
     <!-- END .main-content -->
     </section>
@@ -99,11 +103,6 @@
             <div class="yacht-charter-sale-form">
 
                 <form action="{!! route('frontend.water-buy-single-product') !!}" method="GET">
-                    
-                    <h3>Rs {{ $product->price }}</h3>
-                    
-                    
-                    
                     <label>Quantity:</label>
                     <div class="select-wrapper">
                         <i class="fa fa-angle-down"></i>
@@ -131,7 +130,7 @@
                         <input type="text" name="name" required="required">
                     </div>
                     
-                    <label>Contact Number</label>
+                    <label>Contact Number / Skype ID</label>
                     <div class="input-wrapper">
                         <input type="text" name="contact_number"  required="required">
                     </div>
@@ -173,7 +172,7 @@
                 </li>
                 <li class="cdw-time clearfix">Mon - Sat 9.00 - 18.30. Sunday Closed</li>
                 <li class="cdw-phone clearfix">+91 9923 599 203</li>
-                <li class="cdw-email clearfix">booking@example.com</li>
+                <li class="cdw-email clearfix">kunal@apacintegrated.com</li>
             </ul>
             
         <!-- END .widget -->

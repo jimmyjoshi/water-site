@@ -4,11 +4,13 @@
 	<!-- BEGIN .header-inner -->
 	<div class="header-inner">
 
-		<div class="logo">
-			<h2><a href="{!! route('frontend.index') !!}">Water Slide</a></h2>
+		<div class="qns-one-half">
+			<img src="{{ URL::to('/').'/uploads/logo/apac.png'}}"  alt="logo" width="250"  height="70">
+		</div>
+		
 		</div>
 
-		<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Checkout</a>
+		<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Inquiry</a>
 
 		<!-- BEGIN #primary-navigation -->
 		<nav id="primary-navigation" class="navigation-wrapper fixed-navigation clearfix">

@@ -2354,11 +2354,12 @@ form button i {
 
 /* 7.3 - Page Header */
 #page-header {
-	background: url("../images/image7.jpg") no-repeat center top #f0f0f0;
+	/*background: url("../images/image7.jpg") no-repeat center top #f0f0f0;*/
 	width: 100%;
 	height: 130px;
 	padding: 60px 0 0 0;
 	margin: 0 0 60px 0;
+	background-color: #F0F8FF;
 }
 
 #page-header h1 {

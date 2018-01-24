@@ -13,7 +13,9 @@
 			<div class="video-wrapper video-wrapper-home">
 
 				<div class="video-play">
-					<a href="https://www.youtube.com/watch?v=4uObRcSDyLc" data-gal="prettyPhoto"><i class="fa fa-play"></i></a>
+					<a href="https://www.youtube.com/watch?v=yX_6DGNh5Ew" data-gal="prettyPhoto">
+						<i class="fa fa-play"></i>
+					</a>
 				</div>
 
 			</div>

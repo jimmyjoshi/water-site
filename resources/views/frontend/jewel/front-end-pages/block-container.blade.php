@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('content')
+
 <div id="page-header">
             <h1>Service > {{ $block->title }}</h1>
             <div class="title-block3"></div>
