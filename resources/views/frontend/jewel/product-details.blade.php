@@ -96,7 +96,7 @@
         <!-- BEGIN .widget -->
         <div class="widget">
             
-            <h3>Buy {{ $product->title }}</h3>
+            <h3>Inquire About - {{ $product->title }}</h3>
             <div class="title-block5"></div>
             
             <!-- BEGIN .yacht-charter-sale-form -->

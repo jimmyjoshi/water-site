@@ -102,7 +102,7 @@
 				<!-- END .navigation -->
 				</div>
 
-				<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Check Out</a>
+				<a href="{!! route('frontend.water-my-cart') !!}" class="top-right-button"><i class="fa fa-arrow-circle-right"></i>Inquiry</a>
 
 			<!-- END .navigation-inner -->
 			</div>
