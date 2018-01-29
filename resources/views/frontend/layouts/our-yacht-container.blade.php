@@ -22,9 +22,6 @@
 						<div class="yacht-block-content">
 							<h3><a href="{{ route('frontend.jewel-products-details', ['id' => $product->id]) }}"> {{ $product->title }} </a></h3>
 							<div class="title-block5"></div>
-							<ul>
-								<li>Price: {{$product->price }}</li>
-							</ul>
 						</div>
 					<!-- END .yacht-block -->
 					</div>

@@ -1,7 +1,7 @@
 <!-- BEGIN .content-wrapper -->
 		<section class="content-wrapper home-icons-outer-wrapper">
 
-			<h3 class="center-title">Why Choose Us?</h3>
+			<h3 class="center-title">Why Choose APAC?</h3>
 			<div class="title-block2"></div>
 			<p class="home-intro-text">We have offered luxury yacht chartering services for over 40 years, you can trust us to provide the best</p>
 
